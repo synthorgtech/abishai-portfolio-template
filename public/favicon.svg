@@ -1,0 +1,8 @@
+<!-- TODO: replace with a real favicon. On-brand peach square with blue dot. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="14" fill="#FFBC95"/>
+  <circle cx="32" cy="34" r="9" fill="#2E54FE"/>
+  <rect x="18" y="14" width="6" height="14" rx="3" fill="#333333"/>
+  <rect x="29" y="14" width="6" height="14" rx="3" fill="#333333"/>
+  <rect x="40" y="14" width="6" height="14" rx="3" fill="#333333"/>
+</svg>

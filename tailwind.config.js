@@ -1,0 +1,40 @@
+/** @type {import('tailwindcss').Config} */
+// Brand tokens live here so palette / fluid type / spring easings are reusable utilities.
+export default {
+  content: ['./index.html', './src/**/*.{js,jsx}'],
+  theme: {
+    extend: {
+      colors: {
+        cream: '#FAF6EF',
+        peach: '#FFBC95',
+        blue: '#2E54FE',
+        'gray-warm': '#96908C',
+        ink: '#333333',
+      },
+      fontFamily: {
+        // --font-display defaults to a free geometric/rounded heavy face.
+        // TODO: swap for licensed "Goga" by dropping woff2 into assets/fonts/ and
+        // updating the @font-face + --font-display var in src/styles/tokens.css.
+        display: ['var(--font-display)', 'system-ui', 'sans-serif'],
+        body: ['var(--font-body)', 'Arial', 'system-ui', 'sans-serif'],
+      },
+      fontSize: {
+        // Giant fluid hero name up to ~228px on desktop.
+        giant: ['clamp(4.5rem, 18vw, 14.25rem)', { lineHeight: '0.86', letterSpacing: '-0.03em' }],
+        'display-lg': ['clamp(2.5rem, 7vw, 6rem)', { lineHeight: '0.95', letterSpacing: '-0.02em' }],
+        'display-md': ['clamp(2rem, 5vw, 4rem)', { lineHeight: '1.02', letterSpacing: '-0.015em' }],
+      },
+      transitionTimingFunction: {
+        // The exact spring/overshoot beziers from the spec.
+        'spring-pill': 'cubic-bezier(0.275, 2.254, 0.281, 0.996)',
+        'spring-social': 'cubic-bezier(0.292, 1.932, 0.281, 0.996)',
+        'out-quart': 'cubic-bezier(0.165, 0.84, 0.44, 1)',
+      },
+      zIndex: {
+        cursor: '910',
+        nav: '900',
+      },
+    },
+  },
+  plugins: [],
+}

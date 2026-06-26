@@ -1,0 +1,59 @@
+/* ============================================================================
+   BRAND TOKENS — the single place to RETHEME the whole site.
+   Change the values below and the entire UI follows (components reference these
+   via Tailwind tokens in tailwind.config.js or `var(--token)` arbitrary classes).
+
+   To retheme:
+     1. Core palette  → edit the 6 colors under "Palette".
+        (These also power Tailwind: bg-peach, text-ink, bg-blue, bg-cream, …)
+     2. Scene shades  → edit the derived colors under "Scene" (gradients/dark art).
+     3. Display font  → see the "SWAP FOR GOGA" block + --font-display.
+     4. Identity      → src/config/site.js (name, email, résumé).
+     5. Logo glyph    → src/components/Logo.jsx.
+   ============================================================================ */
+
+/* SWAP FOR GOGA --------------------------------------------------------------
+   The reference uses a licensed font "Goga". To swap:
+   1. Drop the woff2 into /public/assets/fonts/ (e.g. Goga-Heavy.woff2).
+   2. Uncomment the @font-face block below and point it at those files.
+   3. Change --font-display to 'Goga'.
+   Until then we default to "Fredoka" (loaded via Google Fonts in index.html).
+
+@font-face {
+  font-family: 'Goga';
+  src: url('/assets/fonts/Goga-Heavy.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+}
+---------------------------------------------------------------------------- */
+
+:root {
+  /* ── Palette (core brand) ───────────────────────────────────────────────── */
+  --cream: #faf6ef; /* page background */
+  --peach: #ffbc95; /* signature accent */
+  --blue: #2e54fe; /* brand dot, folder, links */
+  --gray-warm: #96908c; /* secondary / un-filled headline text */
+  --ink: #333333; /* body text */
+  --pill-gray: rgba(80, 80, 80, 0.31); /* nav pill background */
+
+  /* ── Scene shades (derived art direction; retheme here too) ─────────────── */
+  --peach-deep: #ff9f73; /* hero gradient top */
+  --peach-soft: #ffb78f; /* hero gradient mid */
+  --peach-tint: #ffd9c2; /* soft fills / blobs */
+  --scene-dark: #1b1410; /* footer / full-bleed dark scene */
+  --scene-tile: #1b1714; /* dark tile/card art background */
+  --scene-cool: #15131f; /* cool dark scene background */
+  --reveal-gray: #8f8882; /* CTA "Copy my Email" reveal panel */
+  --folder-back: #2742d8; /* portfolio folder back panel */
+  --folder-front: #3f63ff; /* portfolio folder front flap */
+  --news-card: #3a342f; /* About "News & Updates" dark card */
+
+  /* ── Typography ─────────────────────────────────────────────────────────── */
+  --font-display: 'Fredoka', system-ui, sans-serif; /* swap for 'Goga' */
+  --font-body: Arial, system-ui, sans-serif;
+
+  /* ── Spring / overshoot easings (mirrored as GSAP CustomEase in lib/gsap.js) */
+  --ease-spring-pill: cubic-bezier(0.275, 2.254, 0.281, 0.996);
+  --ease-spring-social: cubic-bezier(0.292, 1.932, 0.281, 0.996);
+  --ease-out-quart: cubic-bezier(0.165, 0.84, 0.44, 1);
+}
