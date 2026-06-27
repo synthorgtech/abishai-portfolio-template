@@ -3,9 +3,11 @@
 // dotted card strip below. Reveals on scroll.
 import { useEffect, useRef } from 'react'
 import { gsap, prefersReducedMotion } from '../lib/gsap'
+import { useMagnetic } from '../lib/useMagnetic'
 
 export function NewsFeature() {
   const ref = useRef(null)
+  const magnet = useMagnetic(0.3)
   useEffect(() => {
     const el = ref.current
     if (!el || prefersReducedMotion()) return
@@ -45,6 +47,7 @@ export function NewsFeature() {
               XVIII at UC Berkeley. New products are incubating now under Elsheph Systems.
             </p>
             <a
+              ref={magnet}
               href="https://www.linkedin.com/in/abishai-george-e-gosula/"
               target="_blank"
               rel="noreferrer"

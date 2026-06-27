@@ -7,6 +7,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { gsap, prefersReducedMotion } from '../lib/gsap'
 import { GradientScene } from './GradientScene'
+import { useMagnetic } from '../lib/useMagnetic'
 
 const KICKER = 'Clients partner with me because of my'
 const POINTS = [
@@ -30,6 +31,7 @@ export function WhyMe() {
   const col = useRef(null)
   const line = useRef(null)
   const photo = useRef(null)
+  const magnet = useMagnetic(0.3)
   const [failed, setFailed] = useState(false)
 
   useEffect(() => {
@@ -132,6 +134,7 @@ export function WhyMe() {
           </ul>
 
           <Link
+            ref={magnet}
             to="/about"
             data-cursor="view"
             className="group mt-6 inline-flex w-fit items-center gap-3 rounded-full bg-cream/10 py-3 pl-6 pr-3 font-display text-base font-semibold text-cream backdrop-blur transition-transform duration-300 ease-spring-pill hover:scale-105 md:mt-9 md:text-lg"

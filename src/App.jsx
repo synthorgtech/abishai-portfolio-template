@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import { Nav } from './components/Nav'
 import { Footer } from './components/Footer'
 import { Cursor } from './components/Cursor'
+import { KineticScroll } from './components/KineticScroll'
 import { useLenis } from './lib/useLenis'
 import { ScrollTrigger } from './lib/gsap'
 import Home from './pages/Home'
@@ -40,6 +41,7 @@ export default function App() {
   return (
     <>
       <Cursor />
+      <KineticScroll />
       <Nav />
       {/* page content is a sheet over the footer; scrolling to the end lifts it
           (rounded bottom + shadow) to reveal the fixed footer layer beneath. */}

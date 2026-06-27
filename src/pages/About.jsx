@@ -1,35 +1,30 @@
-// ABOUT - built to feel continuous, like the home page:
-//   1. a pinned peach hero (AboutHero) that the content sheet lifts up to uncover
-//   2. an intro statement with drifting blobs, then a rounded image card
-//   3. a stat strip + two-column sections (peach heading + grey body), no hard
-//      dividers - just generous space so it reads as one flowing page
-//   4. Off the clock (hobbies) + a dark News & Updates closing card
+// ABOUT - built to feel continuous and alive:
+//   1. an editorial dossier hero (AboutHero)
+//   2. the story as a stack of living cards (index + cursor tilt + line-by-line reveal)
+//   3. a stat strip (count-up + drawing rings) right under "Who I Am"
+//   4. Education + Awards as self-drawing timelines
+//   5. Off the clock (hobbies) + a dark News & Updates closing card
 import { useEffect } from 'react'
 import { AboutHero } from '../components/AboutHero'
 import { NewsFeature } from '../components/NewsFeature'
 import { Hobbies } from '../components/Hobbies'
 import { StatStrip } from '../components/StatStrip'
-import { Reveal } from '../components/Reveal'
+import { SectionCard } from '../components/SectionCard'
+import { Timeline } from '../components/Timeline'
 import { awards, writing } from '../data/awards'
 
-// Two-column section: large peach heading (right-aligned in left col) + grey body.
-// No hard divider - sections flow continuously, separated only by generous space.
-function Section({ title, children, className = '', id }) {
-  return (
-    <section id={id} className={`scroll-mt-28 ${className}`}>
-      <div className="mx-auto grid max-w-[1600px] gap-8 px-5 py-14 md:grid-cols-2 md:gap-16 md:px-10 md:py-20">
-        <div className="md:pr-10 md:text-right">
-          <Reveal variant="mask">
-            <h2 className="font-display text-display-md font-bold text-peach">{title}</h2>
-          </Reveal>
-        </div>
-        <div className="max-w-xl space-y-5 font-body text-lg leading-relaxed text-ink/70">
-          {children}
-        </div>
-      </div>
-    </section>
-  )
-}
+const EDUCATION = [
+  {
+    title: 'SRM Institute of Science and Technology',
+    sub: 'B.Tech, Computer Science and Engineering',
+    meta: '2023 to 2027',
+  },
+  {
+    title: 'UC Berkeley',
+    sub: 'Visiting Student, Startup Semester · Overall grade A+',
+    meta: '2026',
+  },
+]
 
 export default function About() {
   // If arrived via /about#awards (e.g. the Portfolio folder), scroll to that section.
@@ -49,9 +44,8 @@ export default function About() {
       {/* 1, editorial hero */}
       <AboutHero />
 
-      {/* two-column sections, ordered: Who I Am, then the stat strip, Approach,
-          Education, Philosophy, Awards, Community, Writing, then Off the clock + card */}
-      <Section title="Who I Am">
+      {/* the story as living cards */}
+      <SectionCard index={1} title="Who I Am">
         <p>
           I’m Abishai Gosula, a Computer Science undergraduate and founder building at the
           intersection of AI, embedded vision, and software engineering.
@@ -65,7 +59,7 @@ export default function About() {
           Now I’m building Elsheph Systems, a product studio behind ventures including synth, Benji,
           GMV Live, and Atlitos, creating work that feels useful, human, and built to last.
         </p>
-      </Section>
+      </SectionCard>
 
       {/* stat strip - sits right below Who I Am */}
       <section className="mx-auto max-w-[1600px] px-5 py-12 md:px-10 md:py-16">
@@ -79,7 +73,7 @@ export default function About() {
         />
       </section>
 
-      <Section title="Approach">
+      <SectionCard index={2} title="Approach">
         <p>
           I start from the user’s eyes, then work from the inside out, understanding the product,
           the audience, and the real problem behind the brief.
@@ -89,64 +83,32 @@ export default function About() {
           execution. It’s bringing clarity and shipping something that works better, not just looks
           better.
         </p>
-      </Section>
+      </SectionCard>
 
-      <Section title="Education">
-        <ul className="flex flex-col">
-          {[
-            {
-              school: 'SRM Institute of Science and Technology',
-              detail: 'B.Tech, Computer Science and Engineering',
-              year: '2023 to 2027',
-            },
-            {
-              school: 'UC Berkeley',
-              detail: 'Visiting Student, Startup Semester · Overall grade A+',
-              year: '2026',
-            },
-          ].map((e, i) => (
-            <li
-              key={i}
-              className="flex flex-col gap-1 border-b border-ink/10 py-5 first:pt-0 last:border-0 sm:flex-row sm:items-baseline sm:justify-between"
-            >
-              <div>
-                <span className="block font-display font-semibold text-ink">{e.school}</span>
-                <span className="block font-body text-sm text-ink/60">{e.detail}</span>
-              </div>
-              <span className="shrink-0 text-sm text-gray-warm">{e.year}</span>
-            </li>
-          ))}
-        </ul>
-      </Section>
+      <SectionCard index={3} title="Education">
+        <Timeline items={EDUCATION} />
+      </SectionCard>
 
-      <Section title="Philosophy">
+      <SectionCard index={4} title="Philosophy">
         <p>
           I don’t chase trends. I use them when they make sense. The goal is always to build
           something distinctive, something people actually remember.
         </p>
         <p>Every project, whatever the size, deserves the same level of care.</p>
         <p>And faith keeps me grounded, and growth is part of who I am.</p>
-      </Section>
+      </SectionCard>
 
-      <Section title="Awards & Certifications" id="awards">
-        <ul className="flex flex-col">
-          {awards.map((a, i) => (
-            <li
-              key={i}
-              className="flex flex-col gap-1 border-b border-ink/10 py-4 first:pt-0 last:border-0 sm:flex-row sm:items-baseline sm:justify-between"
-            >
-              <span className={`font-display font-semibold ${a.placeholder ? 'text-ink/40' : 'text-ink'}`}>
-                {a.title}
-              </span>
-              <span className="shrink-0 text-sm text-gray-warm">
-                {[a.org, a.year].filter(Boolean).join(' · ')}
-              </span>
-            </li>
-          ))}
-        </ul>
-      </Section>
+      <SectionCard index={5} title="Awards & Certifications" id="awards">
+        <Timeline
+          items={awards.map((a) => ({
+            title: a.title,
+            meta: [a.org, a.year].filter(Boolean).join(' · '),
+            placeholder: a.placeholder,
+          }))}
+        />
+      </SectionCard>
 
-      <Section title="Community & Giving">
+      <SectionCard index={6} title="Community & Giving">
         <p>
           Through Elsheph Systems, I train and employ young engineers from Andhra Pradesh, building
           a grassroots talent ecosystem in software and AI.
@@ -161,10 +123,10 @@ export default function About() {
             )
           )}
         </ul>
-      </Section>
+      </SectionCard>
 
-      <Section title="Writing">
-        <div className="grid gap-4 sm:grid-cols-1">
+      <SectionCard index={7} title="Writing">
+        <div className="grid gap-4">
           {writing.map((post, i) => (
             <a
               key={i}
@@ -184,7 +146,7 @@ export default function About() {
             </a>
           ))}
         </div>
-      </Section>
+      </SectionCard>
 
       {/* Off the clock - hobbies gallery */}
       <Hobbies />

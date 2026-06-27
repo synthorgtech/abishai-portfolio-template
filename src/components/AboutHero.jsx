@@ -5,6 +5,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { gsap, SplitText, prefersReducedMotion } from '../lib/gsap'
 import { GradientScene } from './GradientScene'
+import { useMagnetic } from '../lib/useMagnetic'
 import { site } from '../config/site'
 
 const META = [
@@ -19,6 +20,7 @@ const MARQUEE = ['Founder', 'Engineer', 'CS student', 'Product', 'Builder', 'Ath
 export function AboutHero() {
   const root = useRef(null)
   const name = useRef(null)
+  const magnet = useMagnetic(0.35)
   const [failed, setFailed] = useState(false)
 
   useEffect(() => {
@@ -80,6 +82,7 @@ export function AboutHero() {
             </dl>
 
             <a
+              ref={magnet}
               href={site.resumeUrl}
               download
               className="ab-cta group mt-7 inline-flex items-center gap-3 rounded-full bg-ink px-6 py-3 font-display text-sm font-semibold text-cream transition-transform duration-300 ease-spring-pill hover:scale-105"
@@ -117,7 +120,7 @@ export function AboutHero() {
 
       {/* role marquee */}
       <div className="relative overflow-hidden border-t border-ink/10 py-4 pb-24 md:pb-5">
-        <div className="ab-track flex w-max items-center whitespace-nowrap">
+        <div className="ab-track kinetic flex w-max items-center whitespace-nowrap">
           {[...MARQUEE, ...MARQUEE].map((w, i) => (
             <span key={i} className="flex items-center font-display text-2xl font-bold text-ink/30 md:text-4xl">
               {w}
