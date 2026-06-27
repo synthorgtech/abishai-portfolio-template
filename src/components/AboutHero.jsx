@@ -45,7 +45,7 @@ export function AboutHero() {
       <div className="pointer-events-none absolute -right-20 top-10 h-72 w-72 rounded-full bg-peach/25 blur-3xl" aria-hidden="true" />
       <div className="pointer-events-none absolute -left-24 bottom-24 h-72 w-72 rounded-full bg-[var(--peach-tint)]/40 blur-3xl" aria-hidden="true" />
 
-      <div className="mx-auto flex w-full max-w-[1600px] flex-1 items-center px-5 pt-28 md:px-10 md:pt-28">
+      <div className="mx-auto flex w-full max-w-[1600px] flex-1 items-center px-5 pb-16 pt-28 md:px-10 md:pb-12 md:pt-28">
         <div className="grid w-full items-center gap-10 md:grid-cols-12 md:gap-12">
           {/* text / dossier */}
           <div className="md:col-span-6 lg:col-span-6">
