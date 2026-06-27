@@ -21,8 +21,8 @@ export function SectionCard({ index, title, children, id }) {
         stagger: 0.1,
         scrollTrigger: { trigger: el, start: 'top 78%' },
       })
-      // cursor tilt (desktop pointers only)
-      if (window.matchMedia('(pointer: fine)').matches) {
+      // cursor tilt (desktop only — phones stay flat plain text)
+      if (window.matchMedia('(min-width: 768px) and (pointer: fine)').matches) {
         const rotX = gsap.quickTo(el, 'rotationX', { duration: 0.5, ease: 'power3' })
         const rotY = gsap.quickTo(el, 'rotationY', { duration: 0.5, ease: 'power3' })
         const onMove = (e) => {
@@ -54,11 +54,12 @@ export function SectionCard({ index, title, children, id }) {
     <section id={id} className="scroll-mt-28 px-5 py-7 md:px-10 md:py-9" style={{ perspective: '1200px' }}>
       <div
         ref={card}
-        className="group mx-auto grid max-w-[1600px] gap-8 rounded-[1.75rem] border border-ink/10 bg-white/55 p-7 shadow-[0_20px_60px_-40px_rgba(51,51,51,0.4)] backdrop-blur-sm transition-shadow duration-300 will-change-transform hover:shadow-[0_40px_90px_-45px_rgba(51,51,51,0.45)] md:grid-cols-2 md:gap-16 md:p-12 lg:p-16"
+        className="group mx-auto grid max-w-[1600px] gap-4 border-0 bg-transparent p-0 transition-shadow duration-300 will-change-transform md:grid-cols-2 md:gap-16 md:rounded-[1.75rem] md:border md:border-ink/10 md:bg-white/55 md:p-12 md:shadow-[0_20px_60px_-40px_rgba(51,51,51,0.4)] md:backdrop-blur-sm md:hover:shadow-[0_40px_90px_-45px_rgba(51,51,51,0.45)] lg:p-16"
         style={{ transformStyle: 'preserve-3d' }}
       >
         <div className="md:pr-10 md:text-right">
-          <span className="kinetic mb-2 block font-display text-5xl font-bold leading-none text-peach/35 md:text-7xl">
+          {/* index shows on desktop cards only; phone is plain text */}
+          <span className="kinetic mb-2 hidden font-display text-5xl font-bold leading-none text-peach/35 md:block md:text-7xl">
             {String(index).padStart(2, '0')}
           </span>
           <h2 className="font-display text-display-md font-bold text-peach">{title}</h2>

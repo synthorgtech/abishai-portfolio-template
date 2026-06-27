@@ -120,8 +120,9 @@ export function AboutHero() {
 
       {/* role marquee */}
       <div className="relative overflow-hidden border-t border-ink/10 py-4 pb-24 md:pb-5">
+        {/* four copies so each half is wider than the viewport; the -50% loop is seamless */}
         <div className="ab-track kinetic flex w-max items-center whitespace-nowrap">
-          {[...MARQUEE, ...MARQUEE].map((w, i) => (
+          {[...MARQUEE, ...MARQUEE, ...MARQUEE, ...MARQUEE].map((w, i) => (
             <span key={i} className="flex items-center font-display text-2xl font-bold text-ink/30 md:text-4xl">
               {w}
               <span className="mx-6 inline-block h-2 w-2 rounded-full bg-peach md:mx-9" />

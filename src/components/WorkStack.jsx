@@ -5,6 +5,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useIsTouch } from '../lib/useIsTouch'
+import { ScrollTrigger, prefersReducedMotion } from '../lib/gsap'
 import { projects } from '../data/projects'
 
 const items = projects.filter((p) => !p.placeholder)
@@ -66,12 +67,23 @@ export function WorkStack() {
   useEffect(() => {
     const el = ref.current
     if (!el) return
-    const obs = new IntersectionObserver(
-      ([e]) => e.isIntersecting && setInView(true),
-      { threshold: 0.3 }
-    )
-    obs.observe(el)
-    return () => obs.disconnect()
+    if (prefersReducedMotion()) {
+      setInView(true)
+      return
+    }
+    // Fan out when the section scrolls in. ScrollTrigger is reliable alongside the
+    // rest of the GSAP/Lenis setup; a timeout fallback guarantees it never stays piled.
+    const st = ScrollTrigger.create({
+      trigger: el,
+      start: 'top 78%',
+      once: true,
+      onEnter: () => setInView(true),
+    })
+    const t = setTimeout(() => setInView(true), 1200)
+    return () => {
+      st.kill()
+      clearTimeout(t)
+    }
   }, [])
 
   const n = items.length
@@ -103,14 +115,14 @@ export function WorkStack() {
           rot = off * 1.5
           scale = 0.94
         } else if (active === i) {
-          tx = off * 130
-          ty = -70
+          tx = off * 185
+          ty = -80
           rot = 0
-          scale = 1.06
+          scale = 1.08
         } else {
-          tx = off * 130
-          ty = Math.abs(off) * 18
-          rot = off * 6
+          tx = off * 185
+          ty = Math.abs(off) * 16
+          rot = off * 5
           scale = 1
         }
         const z = active === i ? 60 : 30 - Math.round(Math.abs(off))
