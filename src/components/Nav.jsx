@@ -1,49 +1,104 @@
 // Top nav: logo left, social ICONS + a subtle résumé link right. The [About][iii][Work]
 // cluster sits centered at the top on desktop and drops to a floating bar at the
-// BOTTOM on mobile (matches the reference).
+// BOTTOM on mobile.
+//
+// Color adapts to the background: we sample the luminance of whatever sits behind the
+// bar (and behind the cluster) on scroll, and flip the text between dark (on light
+// backgrounds) and cream (on dark backgrounds). This is reliable everywhere, unlike
+// mix-blend which doesn't composite across the page's stacking contexts.
+import { useEffect, useState } from 'react'
 import { NavLink, Link, useLocation } from 'react-router-dom'
 import { socials } from '../data/socials'
 import { site } from '../config/site'
 import { Logo, LogoMark } from './Logo'
 import { SocialIcon } from './SocialIcon'
 
-// Individual frosted-glass button. The label uses mix-blend so its color adapts to
-// whatever background shows through the glass.
-function PillLink({ to, children }) {
+// Luminance (0-255) of the first opaque background behind point (x,y), skipping the nav.
+function bgLuminanceAt(x, y) {
+  const els = document.elementsFromPoint(x, y)
+  for (const el of els) {
+    if (el.closest('[data-nav-skip]')) continue
+    const bg = getComputedStyle(el).backgroundColor
+    const m = bg.match(/rgba?\(([\d.]+),\s*([\d.]+),\s*([\d.]+)(?:,\s*([\d.]+))?\)/)
+    if (m && (m[4] === undefined || +m[4] > 0.4)) {
+      return 0.2126 * +m[1] + 0.7152 * +m[2] + 0.0722 * +m[3]
+    }
+  }
+  return 250 // assume light if nothing opaque found
+}
+
+function PillLink({ to, dark, children }) {
   return (
     <NavLink
       to={to}
       className={({ isActive }) =>
         [
           'rounded-full border px-4 py-2 font-display text-sm font-semibold backdrop-blur-md transition-transform duration-300 ease-spring-pill hover:scale-110',
-          isActive ? 'border-transparent bg-ink/80 text-cream' : 'border-white/25 bg-white/15',
+          isActive
+            ? 'border-transparent bg-ink/80 text-cream'
+            : dark
+              ? 'border-cream/30 bg-cream/10 text-cream'
+              : 'border-ink/20 bg-ink/5 text-ink',
         ].join(' ')
       }
     >
-      {({ isActive }) =>
-        isActive ? children : <span className="text-white [mix-blend-mode:difference]">{children}</span>
-      }
+      {children}
     </NavLink>
   )
 }
 
 export function Nav() {
   useLocation() // re-render on route change for active styling
+  const [topDark, setTopDark] = useState(false)
+  const [clusterDark, setClusterDark] = useState(false)
+
+  useEffect(() => {
+    let raf = 0
+    const measure = () => {
+      raf = 0
+      const w = window.innerWidth
+      const h = window.innerHeight
+      const isMobile = w < 768
+      // sample where the brand actually sits: left on desktop, centered on mobile
+      const brandX = isMobile ? w * 0.5 : 84
+      setTopDark(bgLuminanceAt(brandX, 26) < 140)
+      // cluster: bottom-center on mobile, top-center on desktop
+      setClusterDark(bgLuminanceAt(w * 0.5, isMobile ? h - 34 : 18) < 140)
+    }
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(measure)
+    }
+    measure()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', onScroll)
+    window.__lenis?.on('scroll', onScroll)
+    // poll as a fallback so pinned/scrubbed sections (which can change what's behind
+    // the bar without a scroll delta) still update the contrast.
+    const iv = setInterval(measure, 250)
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
+      window.__lenis?.off('scroll', onScroll)
+      clearInterval(iv)
+      if (raf) cancelAnimationFrame(raf)
+    }
+  })
+
+  const topText = topDark ? 'text-cream' : 'text-ink'
 
   return (
     <>
-      {/* top bar — name centered on mobile, name-left + socials-right on desktop.
-          Bare text uses mix-blend so it stays readable over any background. */}
-      <header className="pointer-events-none fixed inset-x-0 top-0 z-nav">
+      {/* top bar — name left + socials right on desktop, name centered on mobile */}
+      <header data-nav-skip className="pointer-events-none fixed inset-x-0 top-0 z-nav">
         <nav className="pointer-events-auto mx-auto flex max-w-[1600px] items-center justify-center px-5 py-4 md:justify-between md:px-10">
-          <Logo className="text-white [mix-blend-mode:difference]" />
+          <Logo className={`${topText} transition-colors duration-300`} />
 
           {/* résumé + socials — hidden on phone */}
-          <div className="hidden items-center gap-4 md:flex md:gap-5">
+          <div className={`hidden items-center gap-4 transition-colors duration-300 md:flex md:gap-5 ${topText}`}>
             <a
               href={site.resumeUrl}
               download
-              className="flex items-center gap-1.5 font-display text-sm font-semibold text-white transition-transform [mix-blend-mode:difference] hover:-translate-y-0.5"
+              className="flex items-center gap-1.5 font-display text-sm font-semibold transition-transform hover:-translate-y-0.5"
             >
               Résumé
               <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
@@ -60,7 +115,7 @@ export function Nav() {
                   rel="noreferrer"
                   aria-label={s.name}
                   data-cursor={s.cursor || undefined}
-                  className="text-white transition-transform duration-300 ease-spring-social [mix-blend-mode:difference] hover:-translate-y-0.5"
+                  className="transition-transform duration-300 ease-spring-social hover:-translate-y-0.5"
                 >
                   <SocialIcon name={s.key} />
                 </a>
@@ -71,8 +126,13 @@ export function Nav() {
       </header>
 
       {/* center cluster — individual floating glass buttons; bottom on mobile, top on desktop */}
-      <div className="pointer-events-auto fixed bottom-6 left-1/2 z-nav flex -translate-x-1/2 items-center gap-3 md:bottom-auto md:top-4 md:gap-2">
-        <PillLink to="/about">About</PillLink>
+      <div
+        data-nav-skip
+        className="pointer-events-auto fixed bottom-6 left-1/2 z-nav flex -translate-x-1/2 items-center gap-3 md:bottom-auto md:top-4 md:gap-2"
+      >
+        <PillLink to="/about" dark={clusterDark}>
+          About
+        </PillLink>
         <Link
           to="/"
           aria-label="Home"
@@ -80,7 +140,9 @@ export function Nav() {
         >
           <LogoMark />
         </Link>
-        <PillLink to="/work">Work</PillLink>
+        <PillLink to="/work" dark={clusterDark}>
+          Work
+        </PillLink>
       </div>
     </>
   )

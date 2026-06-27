@@ -99,32 +99,34 @@ export function WhyMe() {
       <div className="absolute inset-0 bg-gradient-to-t from-[var(--scene-dark)]/60 via-transparent to-transparent" />
 
       {/* left content column (lifted on scroll to reveal point 4) */}
-      <div ref={col} className="absolute inset-x-0 top-0 px-5 will-change-transform md:px-12">
-        <div className="max-w-[42rem] pt-[9vh] md:pb-[24vh] md:pt-[19vh]">
-          <p className="font-display text-sm font-semibold text-peach/90 md:text-xl">
+      <div ref={col} className="absolute inset-x-0 top-0 px-5 will-change-transform md:px-14">
+        <div className="max-w-[48rem] pt-[8vh] md:pb-[22vh] md:pt-[15vh]">
+          <p className="font-display text-base font-semibold uppercase tracking-[0.14em] text-peach/90 md:text-2xl">
             <Words text={KICKER} />
           </p>
-          <h2 className="mt-2 font-display font-bold leading-[0.92] text-peach">
-            <span className="block text-[clamp(2.1rem,9vw,5.8rem)]">
+          <h2 className="mt-3 font-display font-bold leading-[0.88] text-peach md:mt-4">
+            <span className="block text-[clamp(2.6rem,10vw,7rem)]">
               <Words text="perspective +" />
             </span>
-            <span className="block text-[clamp(2.1rem,9vw,5.8rem)]">
+            <span className="block text-[clamp(2.6rem,10vw,7rem)]">
               <Words text="sharp instincts" />
             </span>
           </h2>
 
-          <div ref={line} className="mt-5 h-px w-full origin-left bg-cream/35 md:mt-9" />
+          <div ref={line} className="mt-6 h-[3px] w-full origin-left bg-peach/60 md:mt-10" />
 
-          <ul className="mt-4 flex flex-col md:mt-9">
+          <ul className="flex flex-col">
             {POINTS.map((p, i) => (
               <li
                 key={i}
-                className="wm-point flex items-start gap-3 border-b border-cream/12 py-3 md:gap-4 md:py-5"
+                className="wm-point grid grid-cols-[auto_1fr] items-center gap-5 border-b-2 border-cream/15 py-4 md:gap-8 md:py-6"
               >
-                <svg className="mt-1 shrink-0" width="16" height="16" viewBox="0 0 18 18" fill="none">
-                  <path d="M4 9.5L7.5 13L14 5.5" stroke="#FFBC95" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-                <span className="font-display text-[0.95rem] font-medium leading-snug text-cream/90 md:text-xl">{p}</span>
+                <span className="font-display text-2xl font-bold leading-none text-peach/80 md:text-4xl">
+                  0{i + 1}
+                </span>
+                <span className="font-display text-lg font-semibold leading-[1.2] text-cream md:text-[1.7rem]">
+                  {p}
+                </span>
               </li>
             ))}
           </ul>
@@ -132,11 +134,11 @@ export function WhyMe() {
           <Link
             to="/about"
             data-cursor="view"
-            className="group mt-5 inline-flex w-fit items-center gap-3 rounded-full bg-cream/10 py-2.5 pl-6 pr-2.5 font-display font-semibold text-cream backdrop-blur transition-transform duration-300 ease-spring-pill hover:scale-105 md:mt-9"
+            className="group mt-6 inline-flex w-fit items-center gap-3 rounded-full bg-cream/10 py-3 pl-6 pr-3 font-display text-base font-semibold text-cream backdrop-blur transition-transform duration-300 ease-spring-pill hover:scale-105 md:mt-9 md:text-lg"
           >
             Learn more about me
-            <span className="grid h-9 w-9 place-items-center rounded-full bg-peach transition-transform duration-300 ease-spring-pill group-hover:rotate-45">
-              <svg width="15" height="15" viewBox="0 0 16 16" fill="none">
+            <span className="grid h-10 w-10 place-items-center rounded-full bg-peach transition-transform duration-300 ease-spring-pill group-hover:rotate-45">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                 <path d="M3 13L13 3M13 3H5M13 3V11" stroke="#333" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </span>
