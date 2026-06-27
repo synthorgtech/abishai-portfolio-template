@@ -7,7 +7,7 @@
 //   5. dark News & Updates feature card
 //   6. Education footnote
 import { useEffect } from 'react'
-import { LottieMark } from '../components/LottieMark'
+import { AboutHero } from '../components/AboutHero'
 import { RingScene } from '../components/RingScene'
 import { ParallaxImage } from '../components/ParallaxImage'
 import { NewsFeature } from '../components/NewsFeature'
@@ -46,20 +46,8 @@ export default function About() {
 
   return (
     <>
-      {/* 1, centered landing headline */}
-      <section className="grid min-h-screen place-items-center px-5 text-center">
-        <h1 className="mx-auto max-w-5xl font-display text-[clamp(2.75rem,7vw,6.5rem)] font-bold leading-[0.98] text-gray-warm">
-          <span className="mr-3 inline-grid h-[0.9em] w-[0.9em] translate-y-[0.08em] place-items-center rounded-2xl bg-white align-middle shadow-sm">
-            <LottieMark
-              src="/assets/lottie/logo-mark.json"
-              className="h-[0.55em] w-[0.55em]"
-              fallback={<span className="font-display text-[0.5em] font-bold italic text-blue">iii</span>}
-            />
-          </span>
-          <span className="mr-3 inline-block h-[0.16em] w-[0.16em] translate-y-[-0.1em] rounded-full bg-blue align-middle" />
-          Based in Hyderabad, working globally
-        </h1>
-      </section>
+      {/* 1, landing hero */}
+      <AboutHero />
 
       {/* 2, gradient rings expand on scroll */}
       <RingScene />
