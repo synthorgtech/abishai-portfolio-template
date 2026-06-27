@@ -8,9 +8,10 @@
   html {
     /* Lenis drives scrolling; keep native smooth off. */
     scroll-behavior: auto;
-    /* Lock sideways movement so the fixed footer behind the page can't peek when a
-       touch device rubber-bands horizontally. */
-    overflow-x: hidden;
+    /* Lock sideways rubber-band so the fixed footer can't peek on touch devices.
+       NOTE: do NOT set overflow-x here — overflow on <html> breaks position:sticky,
+       which powers the hero "expose". overscroll-behavior alone is enough; the body
+       clips any horizontal overflow. */
     overscroll-behavior-x: none;
   }
 
