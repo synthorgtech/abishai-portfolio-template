@@ -20,7 +20,7 @@ export function CtaPanel() {
   }
 
   return (
-    <section className="mx-auto max-w-[1600px] px-5 pb-16 md:px-10">
+    <section className="mx-auto max-w-[1600px] px-5 pb-16 pt-24 md:px-10 md:pt-32">
       <div className="relative flex min-h-[60vh] flex-col overflow-hidden rounded-[2rem] border border-ink/20 md:min-h-[84vh]">
         {/* headline */}
         <div className="flex-1 p-7 md:p-16">

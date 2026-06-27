@@ -47,7 +47,7 @@ export default function Home() {
       </section>
 
       {/* 3, selected work (folder stack) */}
-      <section className="mx-auto max-w-[1600px] px-5 py-24 md:px-10 md:py-28">
+      <section className="mx-auto max-w-[1600px] px-5 py-20 md:px-10 md:py-24">
         <div className="mb-12 flex items-end justify-between gap-4">
           <Reveal variant="mask">
             <h3 className="font-display text-display-md font-bold text-ink">Selected work</h3>
@@ -67,7 +67,7 @@ export default function Home() {
       </section>
 
       {/* 4, recognition / Portfolio folder */}
-      <section className="mx-auto max-w-[1600px] px-5 py-28 md:px-10 md:py-40">
+      <section className="mx-auto max-w-[1600px] px-5 py-20 md:px-10 md:py-28">
         <div className="grid items-center gap-16 md:grid-cols-2">
           <div>
             <Reveal variant="mask">
@@ -87,8 +87,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 5, "I sweat the details" over a photo (parallax) */}
-      <section className="relative mx-auto max-w-[1600px] px-5 md:px-10">
+      {/* 5, "I sweat the details" over a photo (parallax) — cream room below it so it
+          doesn't collide with the full-bleed dark perspective section that follows */}
+      <section className="relative mx-auto max-w-[1600px] px-5 pb-24 md:px-10 md:pb-32">
         <ParallaxImage
           src="/assets/img/desk-photo.jpg"
           alt="Abishai at his desk"

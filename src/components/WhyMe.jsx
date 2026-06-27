@@ -36,16 +36,19 @@ export function WhyMe() {
     const el = section.current
     if (!el || prefersReducedMotion()) return
     const ctx = gsap.context(() => {
-      // word-by-word + line entrance (plays once as the section comes up)
+      // entrance (plays once as the section comes up): word-by-word headline, the line
+      // draws across, then each point slides in from the left, one clearly after another.
       const intro = gsap.timeline({
-        scrollTrigger: { trigger: el, start: 'top 72%', once: true },
+        scrollTrigger: { trigger: el, start: 'top 70%', once: true },
       })
       intro
         .from('.wm-word', { yPercent: 110, opacity: 0, duration: 0.7, ease: 'power3.out', stagger: 0.04 })
         .from(line.current, { scaleX: 0, duration: 0.9, ease: 'power2.inOut' }, '-=0.3')
-        .from('.wm-point', { opacity: 0, x: -30, duration: 0.6, ease: 'power2.out', stagger: 0.12 }, '-=0.5')
+        .from('.wm-point', { opacity: 0, x: -80, duration: 0.7, ease: 'power3.out', stagger: 0.2 }, '-=0.2')
+        .from('.wm-cta', { opacity: 0, y: 20, duration: 0.6, ease: 'power3.out' }, '-=0.2')
 
-      // desktop only: pin and lift the column so the 4th point + button appear
+      // desktop only: pin the section, then lift the column on scroll so the headline
+      // rises away and the fourth point + button come into view.
       const mm = gsap.matchMedia()
       mm.add('(min-width: 768px)', () => {
         gsap.fromTo(
@@ -57,7 +60,7 @@ export function WhyMe() {
             scrollTrigger: {
               trigger: el,
               start: 'top top',
-              end: '+=110%',
+              end: '+=120%',
               scrub: true,
               pin: true,
               invalidateOnRefresh: true,
