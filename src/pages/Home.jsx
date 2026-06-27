@@ -25,7 +25,7 @@ export default function Home() {
       </div>
 
       {/* the rest of the page is one sheet that rises over the pinned hero */}
-      <div className="page-surface relative z-10 rounded-t-[2.5rem] shadow-[0_-16px_50px_-34px_rgba(51,51,51,0.25)]">
+      <div className="relative z-10 rounded-t-[2.5rem] bg-cream shadow-[0_-16px_50px_-34px_rgba(51,51,51,0.25)]">
       {/* 2, personal headline with floating blobs (reference-style) */}
       <section className="relative flex min-h-screen flex-col items-center overflow-hidden px-5 pt-28 text-center md:pt-36">
         <div className="relative z-10 max-w-3xl">

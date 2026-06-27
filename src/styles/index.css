@@ -16,10 +16,10 @@
 
   body {
     margin: 0;
-    /* Page backdrop: warm peach at the top fading to white at the bottom, so the
-       screen always feels populated (especially on phones). Themeable via the
-       --surface-* tokens in tokens.css. */
-    background: var(--page-surface);
+    /* Flat cream backdrop (default). To switch to the warm peach->white backdrop,
+       set this to `var(--page-surface)` and add the `.page-surface` class to the
+       content sheets in App.jsx + Home.jsx (see tokens.css --surface-*). */
+    background: var(--cream);
     color: var(--ink);
     font-family: var(--font-body);
     -webkit-font-smoothing: antialiased;
@@ -58,9 +58,10 @@
     font-family: var(--font-display);
   }
 
-  /* Opaque page surface that carries the peach-to-white backdrop, viewport-anchored
-     so every screen reads as peach-on-top / white-at-bottom. Used on the content
-     sheets that sit over the fixed footer. */
+  /* OPT-IN (off by default): opaque page surface carrying the peach->white backdrop.
+     Add this class to the content sheets in App.jsx + Home.jsx (and switch the body
+     background to var(--page-surface)) to enable the warm backdrop. Tune the ends via
+     --surface-top / --surface-bottom in tokens.css. */
   .page-surface {
     background: var(--page-surface);
   }

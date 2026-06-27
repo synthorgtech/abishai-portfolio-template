@@ -41,8 +41,9 @@
   --peach-deep: #ff9f73; /* hero gradient top */
   --peach-soft: #ffb78f; /* hero gradient mid */
   --peach-tint: #ffd9c2; /* soft fills / blobs */
-  /* Page backdrop gradient (peach at top -> white at bottom). Edit the two ends to
-     reshape the whole-site backdrop; --page-surface composes them. */
+  /* OPT-IN page backdrop gradient (peach at top -> white at bottom). OFF by default
+     (the page uses flat --cream). To enable, see the `.page-surface` note in index.css.
+     Edit the two ends to reshape the backdrop; --page-surface composes them. */
   --surface-top: #ffd9c2;
   --surface-bottom: #ffffff;
   --page-surface: linear-gradient(180deg, var(--surface-top) 0%, var(--cream) 32%, var(--surface-bottom) 100%);

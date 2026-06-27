@@ -40,7 +40,7 @@ npm run preview    # preview the production build
 | What | Where | How |
 |---|---|---|
 | **Theme / colors** | `src/styles/tokens.css` | Edit the palette + scene shades (CSS vars). Includes `--slate` (closing CTA text). These also power Tailwind (`bg-peach`, `text-ink`, …) via `tailwind.config.js`. |
-| **Page backdrop** | `src/styles/tokens.css` | `--surface-top` / `--surface-bottom` set the peach→white gradient behind every page (`--page-surface`, applied via the `.page-surface` class in `index.css`). |
+| **Page backdrop** | `src/styles/tokens.css` + `index.css` | Default is flat `--cream`. An **opt-in** peach→white backdrop is wired up but OFF: `--surface-top` / `--surface-bottom` / `--page-surface` define it; enable by switching the `body` background to `var(--page-surface)` and adding the `.page-surface` class to the content sheets (App.jsx + Home.jsx). |
 | **Display font** | `src/styles/tokens.css` (+ `index.html` font link) | `--font-display`; uncomment the `@font-face` to drop in "Goga". |
 | **Identity** (name, email, résumé, role) | `src/config/site.js` | One file → updates nav, footer, cursor copy, CTA everywhere. |
 | **Logo** | `src/components/Logo.jsx` | Swap the name render or the "iii" mark glyph. |
