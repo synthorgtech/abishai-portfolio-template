@@ -20,7 +20,7 @@ function Polaroid({ h, z = 10 }) {
   const [failed, setFailed] = useState(false)
   return (
     <div
-      className={`group relative w-48 rounded-md bg-white p-3 pb-9 shadow-[0_20px_45px_-15px_rgba(0,0,0,0.35)] transition-transform duration-500 ease-spring-pill md:w-56 ${h.rot} hover:z-50 hover:-translate-y-2 hover:rotate-0 hover:scale-[1.05]`}
+      className={`group relative w-48 rounded-md bg-white p-3 pb-9 shadow-[0_8px_20px_-14px_rgba(0,0,0,0.25)] transition-transform duration-500 ease-spring-pill md:w-56 ${h.rot} hover:z-50 hover:-translate-y-2 hover:rotate-0 hover:scale-[1.05]`}
       style={{ zIndex: z }}
     >
       {/* tape */}
@@ -52,16 +52,28 @@ export function Hobbies() {
       stagger: 0.12,
       scrollTrigger: { trigger: el, start: 'top 78%' },
     })
+    // gentle nudge on the mobile "Swipe" arrow to hint the horizontal scroll
+    const nudge = gsap.to('.hb-arrow', { x: 6, duration: 0.8, ease: 'sine.inOut', repeat: -1, yoyo: true })
     return () => {
       t.scrollTrigger?.kill()
       t.kill()
+      nudge.kill()
     }
   }, [])
 
   return (
     <section className="scroll-mt-28 border-t border-ink/10 py-20 md:py-28">
       <div className="mx-auto max-w-[1600px] px-5 md:px-10">
-        <h2 className="mb-10 font-display text-display-md font-bold text-peach">Off the clock.</h2>
+        <div className="mb-10 flex items-center justify-between gap-4">
+          <h2 className="font-display text-display-md font-bold text-peach">Off the clock.</h2>
+          {/* mobile-only affordance: the cards scroll horizontally */}
+          <span className="flex shrink-0 items-center gap-2 font-display text-xs font-semibold uppercase tracking-widest text-ink/45 md:hidden">
+            Swipe
+            <svg className="hb-arrow" width="26" height="14" viewBox="0 0 26 14" fill="none">
+              <path d="M1 7h22M18 2l5 5-5 5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </span>
+        </div>
 
         {/* desktop: scattered scrapbook */}
         <div ref={scatter} className="relative hidden h-[680px] md:block">
