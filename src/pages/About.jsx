@@ -11,7 +11,6 @@ import { NewsFeature } from '../components/NewsFeature'
 import { Hobbies } from '../components/Hobbies'
 import { StatStrip } from '../components/StatStrip'
 import { Reveal } from '../components/Reveal'
-import { FloatingBlobs } from '../components/FloatingBlobs'
 import { awards, writing } from '../data/awards'
 
 // Two-column section: large peach heading (right-aligned in left col) + grey body.
@@ -48,43 +47,8 @@ export default function About() {
 
   return (
     <>
-      {/* 1, hero — pinned BEHIND; the content sheet below lifts up and uncovers it
-          (same expose move as the home hero / reveal footer). */}
-      <div className="sticky top-0 z-0 h-screen overflow-hidden">
-        <AboutHero />
-      </div>
-
-      {/* everything else is one continuous sheet that rises over the pinned hero */}
-      <div className="relative z-10 rounded-t-[2.5rem] bg-cream shadow-[0_-16px_50px_-34px_rgba(51,51,51,0.25)]">
-        {/* 2, intro statement with drifting blobs */}
-        <section className="relative flex min-h-[88vh] flex-col items-center overflow-hidden px-5 pt-28 text-center md:pt-36">
-          <div className="relative z-10 max-w-3xl">
-            <Reveal variant="mask">
-              <h2 className="font-display text-[clamp(2rem,5vw,4rem)] font-bold leading-[1.05] text-gray-warm">
-                Founder, engineer, and computer-science student, building products that feel{' '}
-                <span className="text-peach">useful, human, and built to last</span>.
-              </h2>
-            </Reveal>
-            <Reveal variant="up">
-              <p className="mx-auto mt-7 max-w-md font-body text-lg text-ink/60">
-                The short version. Keep scrolling for the longer one.
-              </p>
-            </Reveal>
-          </div>
-          <FloatingBlobs className="absolute inset-x-0 bottom-0 top-[44%] z-0" />
-        </section>
-
-        {/* 3, image — a rounded, spaced card (no hard full-bleed edge) */}
-        <section className="mx-auto max-w-[1600px] px-5 pb-8 md:px-10">
-          {/* TODO: drop /assets/img/desk-photo.jpg to replace this designed scene */}
-          <ParallaxImage
-            src="/assets/img/desk-photo.jpg"
-            alt="Abishai at his desk"
-            label="DESK PHOTO · drop desk-photo.jpg"
-            tone="warm"
-            className="h-[68vh] min-h-[440px]"
-          />
-        </section>
+      {/* 1, editorial hero */}
+      <AboutHero />
 
       {/* stat strip */}
       <section className="mx-auto max-w-[1600px] px-5 py-16 md:px-10">
@@ -95,6 +59,18 @@ export default function About() {
             { value: 5, suffix: '+', label: 'Awards & honors' },
             { value: 3, label: 'Berkeley SkyDeck slots' },
           ]}
+        />
+      </section>
+
+      {/* rounded image break (no hard full-bleed edge) */}
+      <section className="mx-auto max-w-[1600px] px-5 py-8 md:px-10">
+        {/* TODO: drop /assets/img/desk-photo.jpg to replace this designed scene */}
+        <ParallaxImage
+          src="/assets/img/desk-photo.jpg"
+          alt="Abishai at his desk"
+          label="DESK PHOTO · drop desk-photo.jpg"
+          tone="warm"
+          className="h-[62vh] min-h-[420px]"
         />
       </section>
 
@@ -228,7 +204,6 @@ export default function About() {
 
       {/* dark feature card — closing flourish */}
       <NewsFeature />
-      </div>
     </>
   )
 }
