@@ -29,17 +29,18 @@ export function Nav() {
 
   return (
     <>
-      {/* top bar */}
+      {/* top bar — name centered on mobile, name-left + socials-right on desktop.
+          Bare text uses mix-blend so it stays readable over any background. */}
       <header className="pointer-events-none fixed inset-x-0 top-0 z-nav">
-        <nav className="pointer-events-auto mx-auto flex max-w-[1600px] items-center justify-between px-5 py-4 md:px-10">
-          <Logo className="text-ink" />
+        <nav className="pointer-events-auto mx-auto flex max-w-[1600px] items-center justify-center px-5 py-4 md:justify-between md:px-10">
+          <Logo className="text-white [mix-blend-mode:difference]" />
 
-          <div className="flex items-center gap-4 md:gap-5">
-            {/* subtle résumé */}
+          {/* résumé + socials — hidden on phone */}
+          <div className="hidden items-center gap-4 md:flex md:gap-5">
             <a
               href={site.resumeUrl}
               download
-              className="hidden items-center gap-1.5 font-display text-sm font-semibold text-ink/70 transition-colors hover:text-ink sm:flex"
+              className="flex items-center gap-1.5 font-display text-sm font-semibold text-white transition-transform [mix-blend-mode:difference] hover:-translate-y-0.5"
             >
               Résumé
               <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
@@ -47,7 +48,6 @@ export function Nav() {
               </svg>
             </a>
 
-            {/* social icons */}
             <div className="flex items-center gap-3.5">
               {socials.map((s) => (
                 <a
@@ -57,7 +57,7 @@ export function Nav() {
                   rel="noreferrer"
                   aria-label={s.name}
                   data-cursor={s.cursor || undefined}
-                  className="text-ink transition-all duration-300 ease-spring-social hover:-translate-y-0.5 hover:text-blue"
+                  className="text-white transition-transform duration-300 ease-spring-social [mix-blend-mode:difference] hover:-translate-y-0.5"
                 >
                   <SocialIcon name={s.key} />
                 </a>

@@ -1,14 +1,11 @@
 // Footer = the full-screen closing scene (revealed as the page lifts; see App).
-// Replicates the reference: a full-bleed avatar/desk VIDEO behind, the giant split
-// name at the bottom, role + studio labels in the bottom corners, and a
-// "Website made using" stack on the right. Drop your video at the path below.
+// A full-bleed scene behind, a centered avatar placeholder, and role/studio labels
+// in the bottom corners. Drop your video at the path below.
 import { useState } from 'react'
 import { GradientScene } from './GradientScene'
 
 // TODO: drop your avatar/desk video here and it fills the scene automatically.
 const FOOTER_VIDEO = '/assets/video/desk-hero.mp4'
-
-const STACK = ['Figma', 'React + Vite', 'GSAP', 'Lenis Scroll', 'Tailwind']
 
 function SceneVideo() {
   const [failed, setFailed] = useState(false)
@@ -46,24 +43,19 @@ export function Footer() {
     <footer className="relative h-full w-full overflow-hidden bg-[var(--scene-dark)] text-cream">
       <SceneVideo />
 
-      {/* Website made using — right, mid */}
-      <div className="absolute right-5 top-1/2 hidden -translate-y-1/2 text-right md:block md:right-10">
-        <p className="text-sm text-cream/45">Website made using:</p>
-        <ul className="mt-4 space-y-2.5 font-display text-sm font-semibold text-cream/90">
-          {STACK.map((s) => (
-            <li key={s}>{s}</li>
-          ))}
-        </ul>
-      </div>
-
-      {/* giant name — centered & close together (split to the edges once a video is added) */}
-      <div className="absolute inset-x-0 bottom-12 flex items-end justify-center gap-5 px-5 md:bottom-14 md:px-10">
-        <h2 className="font-display text-[clamp(2.5rem,9vw,9rem)] font-bold leading-[0.8] text-peach">Abishai</h2>
-        <h2 className="font-display text-[clamp(2.5rem,9vw,9rem)] font-bold leading-[0.8] text-peach">Gosula</h2>
+      {/* centered avatar placeholder — TODO: drop your avatar video/image here */}
+      <div className="absolute inset-0 z-10 grid place-items-center px-5">
+        <div className="grid aspect-[3/4] w-56 max-w-[60vw] place-items-center rounded-3xl border border-dashed border-cream/30 bg-cream/5 backdrop-blur-sm md:w-72">
+          <span className="px-4 text-center font-display text-xs font-semibold uppercase tracking-widest text-cream/55">
+            Avatar
+            <br />
+            drop your video / image
+          </span>
+        </div>
       </div>
 
       {/* corner labels */}
-      <div className="absolute inset-x-0 bottom-4 flex items-end justify-between px-5 font-display text-sm font-semibold md:px-10">
+      <div className="absolute inset-x-0 bottom-24 flex items-end justify-between px-5 font-display text-sm font-semibold md:bottom-4 md:px-10">
         <span className="text-cream/90">
           Founder &amp; Engineer <span className="text-cream/45">2026</span>
         </span>
