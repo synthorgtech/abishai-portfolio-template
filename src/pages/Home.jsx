@@ -93,11 +93,15 @@ export default function Home() {
           src="/assets/img/desk-photo.jpg"
           alt="Abishai at his desk"
           label="DESK PHOTO · drop desk-photo.jpg"
-          className="h-[70vh] min-h-[460px]"
+          className="h-[42vh] min-h-[300px] md:h-[70vh] md:min-h-[460px]"
         />
         <div className="pointer-events-none absolute inset-0 flex items-center justify-center px-6 text-center">
           <Reveal variant="scale">
-            <FillHeadline as="h2" fill="peach" className="max-w-3xl text-display-lg font-bold drop-shadow">
+            <FillHeadline
+              as="h2"
+              fill="peach"
+              className="max-w-3xl text-[clamp(2.25rem,8vw,5.5rem)] font-bold drop-shadow"
+            >
               I sweat the details.
             </FillHeadline>
           </Reveal>

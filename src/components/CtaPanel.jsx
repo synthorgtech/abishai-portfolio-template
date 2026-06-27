@@ -21,20 +21,20 @@ export function CtaPanel() {
 
   return (
     <section className="mx-auto max-w-[1600px] px-5 pb-16 md:px-10">
-      <div className="relative flex min-h-[88vh] flex-col overflow-hidden rounded-[2rem] border border-ink/20">
+      <div className="relative flex min-h-[60vh] flex-col overflow-hidden rounded-[2rem] border border-ink/20 md:min-h-[84vh]">
         {/* headline */}
-        <div className="flex-1 p-8 md:p-16">
-          <FillHeadline as="h2" fill="ink" className="max-w-3xl text-display-lg font-bold">
+        <div className="flex-1 p-7 md:p-16">
+          <FillHeadline as="h2" fill="ink" className="max-w-3xl text-[clamp(2.4rem,6vw,5.5rem)] font-bold leading-[1.02]">
             Let's build something people remember
           </FillHeadline>
-          <p className="mt-6 max-w-md font-body text-lg text-ink/55">
-            From idea to shipped product.
+          <p className="mt-5 max-w-md font-body text-base text-ink/55 md:mt-6 md:text-lg">
+            From first idea to shipped product.
           </p>
         </div>
 
-        {/* interactive "Let's talk" bar */}
+        {/* interactive "Let's talk" bar — arrow left, blue "Let's talk" right */}
         <div
-          className="relative h-[26vh] min-h-[150px] cursor-pointer border-t border-ink/15"
+          className="relative h-[20vh] min-h-[110px] cursor-pointer border-t border-ink/15 md:h-[24vh] md:min-h-[150px]"
           data-cursor="email"
           onMouseEnter={() => setRevealed(true)}
           onMouseLeave={() => setRevealed(false)}
@@ -44,21 +44,21 @@ export function CtaPanel() {
           }}
         >
           {/* default: arrow + Let's talk */}
-          <div className="flex h-full items-center justify-between px-8 md:px-16">
-            <span className="text-4xl text-gray-warm md:text-5xl" aria-hidden="true">→</span>
-            <span className="font-display text-[clamp(2.75rem,9vw,8rem)] font-bold leading-none text-gray-warm">
+          <div className="flex h-full items-center justify-between px-7 md:px-16">
+            <span className="text-3xl text-blue md:text-5xl" aria-hidden="true">→</span>
+            <span className="font-display text-[clamp(2.25rem,8vw,6rem)] font-bold leading-none text-blue">
               Let's talk
             </span>
           </div>
 
           {/* reveal panel slides up (slow), email rises gently inside it */}
           <div
-            className={`absolute inset-0 flex items-center justify-between gap-6 overflow-hidden bg-[var(--reveal-gray)] px-8 transition-transform duration-[900ms] ease-out-quart md:px-16 ${
+            className={`absolute inset-0 flex items-center justify-between gap-4 overflow-hidden bg-[var(--reveal-gray)] px-7 transition-transform duration-[900ms] ease-out-quart md:px-16 ${
               revealed ? 'translate-y-0' : 'translate-y-full'
             }`}
           >
             <span
-              className={`truncate font-display text-[clamp(1.75rem,5.5vw,4.5rem)] font-bold leading-none text-peach transition-all duration-[900ms] ease-out-quart ${
+              className={`truncate font-display text-[clamp(1.35rem,5vw,4.5rem)] font-bold leading-none text-peach transition-all duration-[900ms] ease-out-quart ${
                 revealed ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
               }`}
               style={{ transitionDelay: revealed ? '180ms' : '0ms' }}
@@ -70,7 +70,7 @@ export function CtaPanel() {
                 e.stopPropagation()
                 copy()
               }}
-              className="shrink-0 rounded-full bg-blue px-6 py-3 font-display text-base font-semibold text-cream transition-transform duration-300 ease-spring-pill hover:scale-105"
+              className="shrink-0 rounded-full bg-blue px-5 py-2.5 font-display text-sm font-semibold text-cream transition-transform duration-300 ease-spring-pill hover:scale-105 md:px-6 md:py-3 md:text-base"
             >
               {copied ? 'Copied!' : 'Copy my Email'}
             </button>
