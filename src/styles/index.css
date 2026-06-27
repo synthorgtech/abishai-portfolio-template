@@ -8,16 +8,25 @@
   html {
     /* Lenis drives scrolling; keep native smooth off. */
     scroll-behavior: auto;
+    /* Lock sideways movement so the fixed footer behind the page can't peek when a
+       touch device rubber-bands horizontally. */
+    overflow-x: hidden;
+    overscroll-behavior-x: none;
   }
 
   body {
     margin: 0;
-    background: var(--cream);
+    /* Page backdrop: warm peach at the top fading to white at the bottom, so the
+       screen always feels populated (especially on phones). Themeable via the
+       --surface-* tokens in tokens.css. */
+    background: var(--page-surface);
     color: var(--ink);
     font-family: var(--font-body);
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
     overflow-x: hidden;
+    overscroll-behavior-x: none;
+    max-width: 100vw;
   }
 
   /* Lenis recommended baseline */
@@ -47,6 +56,13 @@
 @layer components {
   .font-display {
     font-family: var(--font-display);
+  }
+
+  /* Opaque page surface that carries the peach-to-white backdrop, viewport-anchored
+     so every screen reads as peach-on-top / white-at-bottom. Used on the content
+     sheets that sit over the fixed footer. */
+  .page-surface {
+    background: var(--page-surface);
   }
 
   /* Hide the native cursor only when the custom cursor is active (set on <html> by JS). */

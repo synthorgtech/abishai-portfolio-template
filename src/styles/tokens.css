@@ -41,6 +41,11 @@
   --peach-deep: #ff9f73; /* hero gradient top */
   --peach-soft: #ffb78f; /* hero gradient mid */
   --peach-tint: #ffd9c2; /* soft fills / blobs */
+  /* Page backdrop gradient (peach at top -> white at bottom). Edit the two ends to
+     reshape the whole-site backdrop; --page-surface composes them. */
+  --surface-top: #ffd9c2;
+  --surface-bottom: #ffffff;
+  --page-surface: linear-gradient(180deg, var(--surface-top) 0%, var(--cream) 32%, var(--surface-bottom) 100%);
   --scene-dark: #1b1410; /* footer / full-bleed dark scene */
   --scene-tile: #1b1714; /* dark tile/card art background */
   --scene-cool: #15131f; /* cool dark scene background */

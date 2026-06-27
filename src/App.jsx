@@ -45,7 +45,7 @@ export default function App() {
       <Nav />
       {/* page content is a sheet over the footer; scrolling to the end lifts it
           (rounded bottom + shadow) to reveal the fixed footer layer beneath. */}
-      <div className="relative z-10 mb-[100vh] rounded-b-[2.5rem] bg-cream shadow-[0_40px_90px_-30px_rgba(0,0,0,0.4)]">
+      <div className="page-surface relative z-10 mb-[100vh] rounded-b-[2.5rem] shadow-[0_40px_90px_-30px_rgba(0,0,0,0.4)]">
         <AnimatePresence mode="wait">
           <Routes location={location} key={location.pathname}>
             <Route path="/" element={<Page><Home /></Page>} />

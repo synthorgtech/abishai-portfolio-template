@@ -39,7 +39,8 @@ npm run preview    # preview the production build
 
 | What | Where | How |
 |---|---|---|
-| **Theme / colors** | `src/styles/tokens.css` | Edit the palette + scene shades (CSS vars). These also power Tailwind (`bg-peach`, `text-ink`, …) via `tailwind.config.js`. |
+| **Theme / colors** | `src/styles/tokens.css` | Edit the palette + scene shades (CSS vars). Includes `--slate` (closing CTA text). These also power Tailwind (`bg-peach`, `text-ink`, …) via `tailwind.config.js`. |
+| **Page backdrop** | `src/styles/tokens.css` | `--surface-top` / `--surface-bottom` set the peach→white gradient behind every page (`--page-surface`, applied via the `.page-surface` class in `index.css`). |
 | **Display font** | `src/styles/tokens.css` (+ `index.html` font link) | `--font-display`; uncomment the `@font-face` to drop in "Goga". |
 | **Identity** (name, email, résumé, role) | `src/config/site.js` | One file → updates nav, footer, cursor copy, CTA everywhere. |
 | **Logo** | `src/components/Logo.jsx` | Swap the name render or the "iii" mark glyph. |
@@ -53,10 +54,11 @@ npm run preview    # preview the production build
 ```
 src/
   config/site.js         # identity (swap to rebrand)
-  styles/tokens.css      # theme tokens (swap to retheme) + index.css
+  styles/tokens.css      # theme tokens (swap to retheme) + index.css (global + .page-surface)
   lib/                   # gsap setup, Lenis hook, magnetic hook, touch hook
   data/                  # projects, awards, socials
-  components/            # Cursor, Nav, Footer, Hero, WorkStack, CtaPanel, …
+  components/            # Cursor, Nav (adaptive color), Footer, Hero, WorkStack, CtaPanel,
+                         # AboutHero, SectionCard, Timeline, KineticScroll, StatStrip, …
   pages/                 # Home, Work, About
 public/assets/           # img / video / lottie / fonts (placeholders + real)
 ```
@@ -80,8 +82,18 @@ public/assets/           # img / video / lottie / fonts (placeholders + real)
   pinned column lifts on scroll so the fourth point + button appear. Single screen on mobile.
 - **Reveal footer** (`App.jsx` + `Footer.jsx`) — the page lifts as a rounded sheet to expose
   the full-screen footer scene beneath, with the contact list on the left edge.
-- **Hobbies scrapbook** (`Hobbies.jsx`), **section reveals** (`Reveal.jsx`), magnetic buttons,
-  wave-on-hover links.
+- **Adaptive nav** (`Nav.jsx`) — samples the background luminance behind the bar and flips the
+  text/pills between dark and cream so they stay readable on any section.
+- **About editorial hero** (`AboutHero.jsx`) — name + dossier + portrait card + a looping role
+  marquee (kinetic skew on scroll).
+- **Living cards** (`SectionCard.jsx`) — About's story sections are cards with an index, a 3D
+  cursor tilt, and line-by-line body reveal on desktop; plain text on phones.
+- **Animated data** (`Timeline.jsx`, `StatStrip.jsx`) — self-drawing timelines for
+  Education/Awards; stat numbers count up inside drawing rings.
+- **Kinetic scroll** (`KineticScroll.jsx`) — elements tagged `.kinetic` skew with scroll
+  velocity and settle when idle.
+- **Hobbies scrapbook** (`Hobbies.jsx`), **section reveals** (`Reveal.jsx`), magnetic buttons
+  (`useMagnetic`), cursor-drifting blobs (`FloatingBlobs.jsx`), wave-on-hover links.
 
 ## Accessibility & performance
 
