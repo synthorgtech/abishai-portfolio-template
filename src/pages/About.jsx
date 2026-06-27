@@ -1,12 +1,11 @@
-// ABOUT — built to feel continuous, like the home page:
+// ABOUT - built to feel continuous, like the home page:
 //   1. a pinned peach hero (AboutHero) that the content sheet lifts up to uncover
 //   2. an intro statement with drifting blobs, then a rounded image card
 //   3. a stat strip + two-column sections (peach heading + grey body), no hard
-//      dividers — just generous space so it reads as one flowing page
+//      dividers - just generous space so it reads as one flowing page
 //   4. Off the clock (hobbies) + a dark News & Updates closing card
 import { useEffect } from 'react'
 import { AboutHero } from '../components/AboutHero'
-import { ParallaxImage } from '../components/ParallaxImage'
 import { NewsFeature } from '../components/NewsFeature'
 import { Hobbies } from '../components/Hobbies'
 import { StatStrip } from '../components/StatStrip'
@@ -14,7 +13,7 @@ import { Reveal } from '../components/Reveal'
 import { awards, writing } from '../data/awards'
 
 // Two-column section: large peach heading (right-aligned in left col) + grey body.
-// No hard divider — sections flow continuously, separated only by generous space.
+// No hard divider - sections flow continuously, separated only by generous space.
 function Section({ title, children, className = '', id }) {
   return (
     <section id={id} className={`scroll-mt-28 ${className}`}>
@@ -50,32 +49,8 @@ export default function About() {
       {/* 1, editorial hero */}
       <AboutHero />
 
-      {/* stat strip */}
-      <section className="mx-auto max-w-[1600px] px-5 py-16 md:px-10">
-        <StatStrip
-          stats={[
-            { value: 5, suffix: '+', label: 'Ventures founded' },
-            { value: 6, label: 'Racket sports played' },
-            { value: 5, suffix: '+', label: 'Awards & honors' },
-            { value: 3, label: 'Berkeley SkyDeck slots' },
-          ]}
-        />
-      </section>
-
-      {/* rounded image break (no hard full-bleed edge) */}
-      <section className="mx-auto max-w-[1600px] px-5 py-8 md:px-10">
-        {/* TODO: drop /assets/img/desk-photo.jpg to replace this designed scene */}
-        <ParallaxImage
-          src="/assets/img/desk-photo.jpg"
-          alt="Abishai at his desk"
-          label="DESK PHOTO · drop desk-photo.jpg"
-          tone="warm"
-          className="h-[62vh] min-h-[420px]"
-        />
-      </section>
-
-      {/* two-column sections, ordered: Who I Am, Approach, Education, Philosophy,
-          Awards, Community, Writing — then Off the clock + closing card */}
+      {/* two-column sections, ordered: Who I Am, then the stat strip, Approach,
+          Education, Philosophy, Awards, Community, Writing, then Off the clock + card */}
       <Section title="Who I Am">
         <p>
           I’m Abishai Gosula, a Computer Science undergraduate and founder building at the
@@ -91,6 +66,18 @@ export default function About() {
           GMV Live, and Atlitos, creating work that feels useful, human, and built to last.
         </p>
       </Section>
+
+      {/* stat strip - sits right below Who I Am */}
+      <section className="mx-auto max-w-[1600px] px-5 py-12 md:px-10 md:py-16">
+        <StatStrip
+          stats={[
+            { value: 5, suffix: '+', label: 'Ventures founded' },
+            { value: 6, label: 'Racket sports played' },
+            { value: 5, suffix: '+', label: 'Awards & honors' },
+            { value: 2, label: 'Berkeley SkyDeck slots' },
+          ]}
+        />
+      </section>
 
       <Section title="Approach">
         <p>
@@ -110,7 +97,7 @@ export default function About() {
             {
               school: 'SRM Institute of Science and Technology',
               detail: 'B.Tech, Computer Science and Engineering',
-              year: '2023 – 2027',
+              year: '2023 to 2027',
             },
             {
               school: 'UC Berkeley',
@@ -199,10 +186,10 @@ export default function About() {
         </div>
       </Section>
 
-      {/* Off the clock — hobbies gallery */}
+      {/* Off the clock - hobbies gallery */}
       <Hobbies />
 
-      {/* dark feature card — closing flourish */}
+      {/* dark feature card - closing flourish */}
       <NewsFeature />
     </>
   )

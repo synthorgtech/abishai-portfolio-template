@@ -1,4 +1,4 @@
-// About landing — an editorial "dossier" rather than a centered statement: a large
+// About landing - an editorial "dossier" rather than a centered statement: a large
 // left name, a portrait card with a floating tag, a meta dossier (role/location/
 // studio/status), and a continuously scrolling role marquee along the bottom. Its own
 // look, distinct from the type-only home hero.
@@ -63,7 +63,7 @@ export function AboutHero() {
             </h1>
 
             <p className="ab-meta-row mt-6 max-w-md font-body text-base leading-relaxed text-ink/65 md:text-lg">
-              Building at the intersection of AI, embedded vision, and software — products that
+              Building at the intersection of AI, embedded vision, and software. Products that
               feel useful, human, and built to last.
             </p>
 

@@ -1,4 +1,4 @@
-// Closing CTA — matches the reference: a peach section holding one bordered card.
+// Closing CTA - matches the reference: a peach section holding one bordered card.
 // Slate headline + subline up top, a divider, then a bottom row with the arrow on the
 // left and "Let's talk" on the right (same slate). Hovering "Let's talk" slides a
 // panel up to reveal the email + a "Copy my Email" button; clicking copies it.
@@ -33,7 +33,7 @@ export function CtaPanel() {
             </p>
           </div>
 
-          {/* interactive "Let's talk" bar — arrow left, "Let's talk" right (slate) */}
+          {/* interactive "Let's talk" bar - arrow left, "Let's talk" right (slate) */}
           <div
             className="relative h-[19vh] min-h-[108px] cursor-pointer border-t border-[var(--slate)]/25 md:h-[24vh] md:min-h-[150px]"
             data-cursor="email"

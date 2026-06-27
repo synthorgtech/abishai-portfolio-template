@@ -88,12 +88,12 @@ export function Nav() {
 
   return (
     <>
-      {/* top bar — name left + socials right on desktop, name centered on mobile */}
+      {/* top bar - name left + socials right on desktop, name centered on mobile */}
       <header data-nav-skip className="pointer-events-none fixed inset-x-0 top-0 z-nav">
         <nav className="pointer-events-auto mx-auto flex max-w-[1600px] items-center justify-center px-5 py-4 md:justify-between md:px-10">
           <Logo className={`${topText} transition-colors duration-300`} />
 
-          {/* résumé + socials — hidden on phone */}
+          {/* résumé + socials - hidden on phone */}
           <div className={`hidden items-center gap-4 transition-colors duration-300 md:flex md:gap-5 ${topText}`}>
             <a
               href={site.resumeUrl}
@@ -125,7 +125,7 @@ export function Nav() {
         </nav>
       </header>
 
-      {/* center cluster — individual floating glass buttons; bottom on mobile, top on desktop */}
+      {/* center cluster - individual floating glass buttons; bottom on mobile, top on desktop */}
       <div
         data-nav-skip
         className="pointer-events-auto fixed bottom-6 left-1/2 z-nav flex -translate-x-1/2 items-center gap-3 md:bottom-auto md:top-4 md:gap-2"

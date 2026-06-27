@@ -1,4 +1,4 @@
-// Brand logo: the name with a blue accent dot. Swap point — change the mark or
+// Brand logo: the name with a blue accent dot. Swap point - change the mark or
 // the name here (or the colors in tokens.css) to rebrand the whole site.
 import { Link } from 'react-router-dom'
 import { site } from '../config/site'

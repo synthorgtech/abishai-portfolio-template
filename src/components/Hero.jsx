@@ -1,4 +1,4 @@
-// Hero — just the name, centered, on a coral→cream gradient that blends into the
+// Hero - just the name, centered, on a coral→cream gradient that blends into the
 // page below. Soft cream name with a blue brand dot; letters rise in on load; a
 // faint glow follows the cursor. The personal headline lives in the section below.
 import { useEffect, useRef } from 'react'

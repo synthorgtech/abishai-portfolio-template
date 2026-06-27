@@ -18,7 +18,7 @@ import { CtaPanel } from '../components/CtaPanel'
 export default function Home() {
   return (
     <>
-      {/* 1, hero — pinned BEHIND, so the content sheet below lifts up and covers it
+      {/* 1, hero - pinned BEHIND, so the content sheet below lifts up and covers it
           (same "expose" feeling as the reveal footer, but at the top of the page). */}
       <div className="sticky top-0 z-0 h-screen overflow-hidden">
         <Hero />
@@ -87,7 +87,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 5, "I sweat the details" over a photo (parallax) — cream room below it so it
+      {/* 5, "I sweat the details" over a photo (parallax) - cream room below it so it
           doesn't collide with the full-bleed dark perspective section that follows.
           The headline overlay sits on the IMAGE only (not the padding) so it stays
           perfectly centered. */}
@@ -109,7 +109,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 6, perspective + sharp instincts — pinned, points fly in from both sides */}
+      {/* 6, perspective + sharp instincts - pinned, points fly in from both sides */}
       <WhyMe />
 
       {/* 7, CTA panel with hover-to-reveal email */}

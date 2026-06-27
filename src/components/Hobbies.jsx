@@ -1,4 +1,4 @@
-// "Off the clock" — a scattered polaroid scrapbook of AG's hobbies (tennis, racket
+// "Off the clock" - a scattered polaroid scrapbook of AG's hobbies (tennis, racket
 // sports, football, family). Photos drop in tilted on scroll and straighten + lift +
 // come to front on hover. Drop real photos at the paths below.
 import { useEffect, useRef, useState } from 'react'

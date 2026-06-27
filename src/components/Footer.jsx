@@ -44,7 +44,7 @@ export function Footer() {
     <footer className="relative h-full w-full overflow-hidden bg-[var(--scene-dark)] text-cream">
       <SceneVideo />
 
-      {/* contact — left edge */}
+      {/* contact - left edge */}
       <div className="absolute left-5 top-1/4 z-10 md:left-10">
         <p className="mb-3 text-xs uppercase tracking-[0.2em] text-cream/45">Contact</p>
         <ul className="flex flex-col gap-2.5 font-display text-base font-semibold">
@@ -64,7 +64,7 @@ export function Footer() {
         </ul>
       </div>
 
-      {/* centered avatar placeholder — TODO: drop your avatar video/image here */}
+      {/* centered avatar placeholder - TODO: drop your avatar video/image here */}
       <div className="absolute inset-0 z-10 grid place-items-center px-5">
         <div className="grid aspect-[3/4] w-56 max-w-[60vw] place-items-center rounded-3xl border border-dashed border-cream/30 bg-cream/5 backdrop-blur-sm md:w-72">
           <span className="px-4 text-center font-display text-xs font-semibold uppercase tracking-widest text-cream/55">

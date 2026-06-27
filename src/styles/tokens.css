@@ -1,5 +1,5 @@
 /* ============================================================================
-   BRAND TOKENS — the single place to RETHEME the whole site.
+   BRAND TOKENS - the single place to RETHEME the whole site.
    Change the values below and the entire UI follows (components reference these
    via Tailwind tokens in tailwind.config.js or `var(--token)` arbitrary classes).
 
@@ -33,7 +33,7 @@
   --peach: #ffbc95; /* signature accent */
   --blue: #2e54fe; /* brand dot, folder, links */
   --gray-warm: #96908c; /* secondary / un-filled headline text */
-  --slate: #6d717c; /* cool slate — closing CTA headline + "Let's talk" */
+  --slate: #6d717c; /* cool slate - closing CTA headline + "Let's talk" */
   --ink: #333333; /* body text */
   --pill-gray: rgba(80, 80, 80, 0.31); /* nav pill background */
 

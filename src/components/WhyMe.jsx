@@ -1,4 +1,4 @@
-// "perspective + sharp instincts" — a single full-bleed photo of AG with the copy
+// "perspective + sharp instincts" - a single full-bleed photo of AG with the copy
 // laid over the left. On enter, the kicker + headline reveal word by word and the
 // divider line draws across. On desktop the section pins: you arrive seeing the
 // headline + first three points, and scrolling lifts the column to reveal the
@@ -86,7 +86,7 @@ export function WhyMe() {
 
   return (
     <section ref={section} className="relative h-screen w-full overflow-hidden bg-[var(--scene-dark)] text-cream">
-      {/* ONE full-bleed photo of AG — TODO: drop /assets/img/whyme.jpg */}
+      {/* ONE full-bleed photo of AG - TODO: drop /assets/img/whyme.jpg */}
       <div ref={photo} className="absolute inset-0 scale-[1.06]">
         {failed ? (
           <GradientScene tone="warm" rounded="rounded-none" className="absolute inset-0 h-full w-full" label="YOUR PHOTO · drop whyme.jpg" />
