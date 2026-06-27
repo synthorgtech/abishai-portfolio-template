@@ -25,7 +25,7 @@ export default function Home() {
       </div>
 
       {/* the rest of the page is one sheet that rises over the pinned hero */}
-      <div className="relative z-10 rounded-t-[2.5rem] bg-cream shadow-[0_-40px_90px_-30px_rgba(51,51,51,0.45)]">
+      <div className="relative z-10 rounded-t-[2.5rem] bg-cream shadow-[0_-16px_50px_-34px_rgba(51,51,51,0.25)]">
       {/* 2, personal headline with floating blobs (reference-style) */}
       <section className="relative flex min-h-screen flex-col items-center overflow-hidden px-5 pt-28 text-center md:pt-36">
         <div className="relative z-10 max-w-3xl">
@@ -88,24 +88,24 @@ export default function Home() {
       </section>
 
       {/* 5, "I sweat the details" over a photo (parallax) — cream room below it so it
-          doesn't collide with the full-bleed dark perspective section that follows */}
-      <section className="relative mx-auto max-w-[1600px] px-5 pb-24 md:px-10 md:pb-32">
-        <ParallaxImage
-          src="/assets/img/desk-photo.jpg"
-          alt="Abishai at his desk"
-          label="DESK PHOTO · drop desk-photo.jpg"
-          className="h-[42vh] min-h-[300px] md:h-[70vh] md:min-h-[460px]"
-        />
-        <div className="pointer-events-none absolute inset-0 flex items-center justify-center px-6 text-center">
-          <Reveal variant="scale">
-            <FillHeadline
-              as="h2"
-              fill="peach"
-              className="max-w-3xl text-[clamp(2.25rem,8vw,5.5rem)] font-bold drop-shadow"
-            >
-              I sweat the details.
-            </FillHeadline>
-          </Reveal>
+          doesn't collide with the full-bleed dark perspective section that follows.
+          The headline overlay sits on the IMAGE only (not the padding) so it stays
+          perfectly centered. */}
+      <section className="mx-auto max-w-[1600px] px-5 pb-24 md:px-10 md:pb-32">
+        <div className="relative">
+          <ParallaxImage
+            src="/assets/img/desk-photo.jpg"
+            alt="Abishai at his desk"
+            label="DESK PHOTO · drop desk-photo.jpg"
+            className="h-[42vh] min-h-[300px] md:h-[70vh] md:min-h-[460px]"
+          />
+          <div className="pointer-events-none absolute inset-0 flex items-center justify-center px-6 text-center">
+            <Reveal variant="mask">
+              <h2 className="max-w-3xl font-display text-[clamp(2.25rem,8vw,5.5rem)] font-bold text-cream [text-shadow:0_2px_24px_rgba(0,0,0,0.35)]">
+                I sweat the details.
+              </h2>
+            </Reveal>
+          </div>
         </div>
       </section>
 
