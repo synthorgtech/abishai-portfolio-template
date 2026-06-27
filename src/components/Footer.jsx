@@ -3,6 +3,7 @@
 // in the bottom corners. Drop your video at the path below.
 import { useState } from 'react'
 import { GradientScene } from './GradientScene'
+import { socials } from '../data/socials'
 
 // TODO: drop your avatar/desk video here and it fills the scene automatically.
 const FOOTER_VIDEO = '/assets/video/desk-hero.mp4'
@@ -42,6 +43,26 @@ export function Footer() {
   return (
     <footer className="relative h-full w-full overflow-hidden bg-[var(--scene-dark)] text-cream">
       <SceneVideo />
+
+      {/* contact — left edge */}
+      <div className="absolute left-5 top-1/4 z-10 md:left-10">
+        <p className="mb-3 text-xs uppercase tracking-[0.2em] text-cream/45">Contact</p>
+        <ul className="flex flex-col gap-2.5 font-display text-base font-semibold">
+          {socials.map((s) => (
+            <li key={s.key}>
+              <a
+                href={s.href}
+                target={s.href.startsWith('mailto') ? undefined : '_blank'}
+                rel="noreferrer"
+                data-cursor={s.cursor || undefined}
+                className="text-cream/85 transition-colors hover:text-peach"
+              >
+                {s.name}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
 
       {/* centered avatar placeholder — TODO: drop your avatar video/image here */}
       <div className="absolute inset-0 z-10 grid place-items-center px-5">

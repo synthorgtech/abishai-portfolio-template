@@ -1,0 +1,145 @@
+// "perspective + sharp instincts" — a single full-bleed photo of AG with the copy
+// laid over the left. On enter, the kicker + headline reveal word by word and the
+// divider line draws across. On desktop the section pins: you arrive seeing the
+// headline + first three points, and scrolling lifts the column to reveal the
+// fourth point and the button. The photo drifts subtly with the cursor.
+import { useEffect, useRef, useState } from 'react'
+import { Link } from 'react-router-dom'
+import { gsap, prefersReducedMotion } from '../lib/gsap'
+import { GradientScene } from './GradientScene'
+
+const KICKER = 'Clients partner with me because of my'
+const POINTS = [
+  'I bring a sharp product perspective, not just code.',
+  'I sweat the craft, from first idea to shipped product.',
+  'I lead the team and own the outcome, end to end.',
+  'I turn ambiguity into products people actually use.',
+]
+
+// split a string into word <span>s so each can animate independently
+function Words({ text, className = '' }) {
+  return text.split(' ').map((w, i) => (
+    <span key={i} className="inline-block overflow-hidden align-bottom">
+      <span className={`wm-word inline-block ${className}`}>{w}&nbsp;</span>
+    </span>
+  ))
+}
+
+export function WhyMe() {
+  const section = useRef(null)
+  const col = useRef(null)
+  const line = useRef(null)
+  const photo = useRef(null)
+  const [failed, setFailed] = useState(false)
+
+  useEffect(() => {
+    const el = section.current
+    if (!el || prefersReducedMotion()) return
+    const ctx = gsap.context(() => {
+      // word-by-word + line entrance (plays once as the section comes up)
+      const intro = gsap.timeline({
+        scrollTrigger: { trigger: el, start: 'top 72%', once: true },
+      })
+      intro
+        .from('.wm-word', { yPercent: 110, opacity: 0, duration: 0.7, ease: 'power3.out', stagger: 0.04 })
+        .from(line.current, { scaleX: 0, duration: 0.9, ease: 'power2.inOut' }, '-=0.3')
+        .from('.wm-point', { opacity: 0, x: -30, duration: 0.6, ease: 'power2.out', stagger: 0.12 }, '-=0.5')
+
+      // desktop only: pin and lift the column so the 4th point + button appear
+      const mm = gsap.matchMedia()
+      mm.add('(min-width: 768px)', () => {
+        gsap.fromTo(
+          col.current,
+          { y: 0 },
+          {
+            y: () => Math.min(0, window.innerHeight - col.current.scrollHeight - 56),
+            ease: 'none',
+            scrollTrigger: {
+              trigger: el,
+              start: 'top top',
+              end: '+=110%',
+              scrub: true,
+              pin: true,
+              invalidateOnRefresh: true,
+            },
+          }
+        )
+      })
+
+      // photo drifts gently toward the cursor (smooth, springy)
+      const xTo = gsap.quickTo(photo.current, 'x', { duration: 0.9, ease: 'power3.out' })
+      const yTo = gsap.quickTo(photo.current, 'y', { duration: 0.9, ease: 'power3.out' })
+      const onMove = (e) => {
+        const cx = (e.clientX / window.innerWidth - 0.5) * 28
+        const cy = (e.clientY / window.innerHeight - 0.5) * 28
+        xTo(-cx)
+        yTo(-cy)
+      }
+      window.addEventListener('mousemove', onMove)
+      return () => window.removeEventListener('mousemove', onMove)
+    }, el)
+    return () => ctx.revert()
+  }, [])
+
+  return (
+    <section ref={section} className="relative h-screen w-full overflow-hidden bg-[var(--scene-dark)] text-cream">
+      {/* ONE full-bleed photo of AG — TODO: drop /assets/img/whyme.jpg */}
+      <div ref={photo} className="absolute inset-0 scale-[1.06]">
+        {failed ? (
+          <GradientScene tone="warm" rounded="rounded-none" className="absolute inset-0 h-full w-full" label="YOUR PHOTO · drop whyme.jpg" />
+        ) : (
+          <img src="/assets/img/whyme.jpg" alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-cover" onError={() => setFailed(true)} />
+        )}
+      </div>
+      {/* warm wash: dark on the left for legible text, photo breathing on the right */}
+      <div className="absolute inset-0 bg-gradient-to-r from-[var(--scene-dark)]/92 via-[var(--scene-dark)]/55 to-[var(--scene-dark)]/10" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[var(--scene-dark)]/60 via-transparent to-transparent" />
+
+      {/* left content column (lifted on scroll to reveal point 4) */}
+      <div ref={col} className="absolute inset-x-0 top-0 px-5 will-change-transform md:px-12">
+        <div className="max-w-[42rem] pt-[9vh] md:pb-[24vh] md:pt-[19vh]">
+          <p className="font-display text-sm font-semibold text-peach/90 md:text-xl">
+            <Words text={KICKER} />
+          </p>
+          <h2 className="mt-2 font-display font-bold leading-[0.92] text-peach">
+            <span className="block text-[clamp(2.1rem,9vw,5.8rem)]">
+              <Words text="perspective +" />
+            </span>
+            <span className="block text-[clamp(2.1rem,9vw,5.8rem)]">
+              <Words text="sharp instincts" />
+            </span>
+          </h2>
+
+          <div ref={line} className="mt-5 h-px w-full origin-left bg-cream/35 md:mt-9" />
+
+          <ul className="mt-4 flex flex-col md:mt-9">
+            {POINTS.map((p, i) => (
+              <li
+                key={i}
+                className="wm-point flex items-start gap-3 border-b border-cream/12 py-3 md:gap-4 md:py-5"
+              >
+                <svg className="mt-1 shrink-0" width="16" height="16" viewBox="0 0 18 18" fill="none">
+                  <path d="M4 9.5L7.5 13L14 5.5" stroke="#FFBC95" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+                <span className="font-display text-[0.95rem] font-medium leading-snug text-cream/90 md:text-xl">{p}</span>
+              </li>
+            ))}
+          </ul>
+
+          <Link
+            to="/about"
+            data-cursor="view"
+            className="group mt-5 inline-flex w-fit items-center gap-3 rounded-full bg-cream/10 py-2.5 pl-6 pr-2.5 font-display font-semibold text-cream backdrop-blur transition-transform duration-300 ease-spring-pill hover:scale-105 md:mt-9"
+          >
+            Learn more about me
+            <span className="grid h-9 w-9 place-items-center rounded-full bg-peach transition-transform duration-300 ease-spring-pill group-hover:rotate-45">
+              <svg width="15" height="15" viewBox="0 0 16 16" fill="none">
+                <path d="M3 13L13 3M13 3H5M13 3V11" stroke="#333" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </span>
+          </Link>
+        </div>
+      </div>
+    </section>
+  )
+}

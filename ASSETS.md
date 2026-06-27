@@ -23,6 +23,7 @@ real screenshot/clip overlays the designed brand-art tile on both Home and Work.
 | Project poster | `public/assets/img/video-loading.jpg` | JPG | Shared video poster | Replace the file. |
 | Desk photo of AG | `public/assets/img/desk-photo.jpg` | JPG | "The work takes time" (Home) + About full-bleed image | Drop the file; designed gradient scene shows until then. |
 | Portrait of AG | `public/assets/img/portrait.jpg` | JPG (3:4) | (optional) About | Drop the file and reference it; designed scene used by default. |
+| Perspective photo of AG | `public/assets/img/whyme.jpg` | JPG (landscape, subject on the right) | "perspective + sharp instincts" pinned section (Home) | Drop the file; full-bleed gradient scene shows until then. |
 | Project visuals | `public/assets/img/<slug>.jpg` or `.mp4` | JPG / MP4 | Home cards + Work gallery | Set `media:` on the project in `src/data/projects.js`. |
 | Folder icons | `public/assets/img/folder-front.png`, `folder-back.png` | PNG w/ transparency | Tools section / Work hero | Drop files, then point `FolderIcons.jsx` layers at them (see `TODO:` there). Coded SVG folder shows until then. |
 | Coffee mug + steam | `public/assets/img/mug.png` (+ coded steam) | PNG | Footer scene | Drop `mug.png` and wire it into `SteamMug.jsx`; or bake mug+steam into `desk-hero.mp4`. |

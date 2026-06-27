@@ -7,19 +7,22 @@ import { site } from '../config/site'
 import { Logo, LogoMark } from './Logo'
 import { SocialIcon } from './SocialIcon'
 
+// Individual frosted-glass button. The label uses mix-blend so its color adapts to
+// whatever background shows through the glass.
 function PillLink({ to, children }) {
   return (
     <NavLink
       to={to}
       className={({ isActive }) =>
         [
-          'rounded-full px-4 py-1.5 font-display text-sm font-semibold transition-transform duration-300 ease-spring-pill hover:scale-110',
-          isActive ? 'bg-ink/80 text-cream' : 'text-ink',
+          'rounded-full border px-4 py-2 font-display text-sm font-semibold backdrop-blur-md transition-transform duration-300 ease-spring-pill hover:scale-110',
+          isActive ? 'border-transparent bg-ink/80 text-cream' : 'border-white/25 bg-white/15',
         ].join(' ')
       }
-      style={({ isActive }) => (isActive ? {} : { background: 'var(--pill-gray)' })}
     >
-      {children}
+      {({ isActive }) =>
+        isActive ? children : <span className="text-white [mix-blend-mode:difference]">{children}</span>
+      }
     </NavLink>
   )
 }
@@ -67,13 +70,13 @@ export function Nav() {
         </nav>
       </header>
 
-      {/* center cluster — top on desktop, floating bottom on mobile */}
-      <div className="pointer-events-auto fixed bottom-6 left-1/2 z-nav flex -translate-x-1/2 items-center gap-2 rounded-full bg-cream/70 p-1.5 shadow-lg backdrop-blur md:bottom-auto md:top-4 md:bg-transparent md:p-0 md:shadow-none md:backdrop-blur-0">
+      {/* center cluster — individual floating glass buttons; bottom on mobile, top on desktop */}
+      <div className="pointer-events-auto fixed bottom-6 left-1/2 z-nav flex -translate-x-1/2 items-center gap-3 md:bottom-auto md:top-4 md:gap-2">
         <PillLink to="/about">About</PillLink>
         <Link
           to="/"
           aria-label="Home"
-          className="grid h-10 w-10 place-items-center rounded-xl bg-white shadow-sm transition-transform duration-300 ease-spring-pill hover:scale-110"
+          className="grid h-10 w-10 place-items-center rounded-xl bg-white shadow-md transition-transform duration-300 ease-spring-pill hover:scale-110"
         >
           <LogoMark />
         </Link>

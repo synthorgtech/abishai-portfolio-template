@@ -1,7 +1,8 @@
 // HOME, light/cream. Calm structure with tasteful element-level micro-interactions
 // (button waves, secret buttons, hover life) rather than heavy ambient motion.
-// hero -> manifesto -> selected work (stack) -> tools/Portfolio folder ->
-// "I sweat the details" parallax -> sharp instincts -> CTA -> footer (shared).
+// hero (pinned, content sheet lifts over it) -> manifesto -> selected work (stack) ->
+// recognition/Portfolio folder -> "I sweat the details" parallax ->
+// perspective + sharp instincts (pinned, WhyMe) -> CTA -> footer (shared).
 import { Link } from 'react-router-dom'
 import { Hero } from '../components/Hero'
 import { FillHeadline } from '../components/FillHeadline'
@@ -9,25 +10,22 @@ import { WorkStack } from '../components/WorkStack'
 import { Reveal } from '../components/Reveal'
 import { FolderIcons } from '../components/FolderIcons'
 import { ParallaxImage } from '../components/ParallaxImage'
-import { CheckList } from '../components/CheckList'
+import { WhyMe } from '../components/WhyMe'
 import { WaveText } from '../components/WaveText'
 import { FloatingBlobs } from '../components/FloatingBlobs'
 import { CtaPanel } from '../components/CtaPanel'
 
-// Leadership-forward strengths (one technical nod, not a tech dump).
-const STRENGTHS = [
-  'Leads teams and owns the outcome',
-  'Turns ambiguity into shipped products',
-  'Moves fast and sweats the details',
-  'Computer-science depth when it counts',
-]
-
 export default function Home() {
   return (
     <>
-      {/* 1, hero (name) */}
-      <Hero />
+      {/* 1, hero — pinned BEHIND, so the content sheet below lifts up and covers it
+          (same "expose" feeling as the reveal footer, but at the top of the page). */}
+      <div className="sticky top-0 z-0 h-screen overflow-hidden">
+        <Hero />
+      </div>
 
+      {/* the rest of the page is one sheet that rises over the pinned hero */}
+      <div className="relative z-10 rounded-t-[2.5rem] bg-cream shadow-[0_-40px_90px_-30px_rgba(51,51,51,0.45)]">
       {/* 2, personal headline with floating blobs (reference-style) */}
       <section className="relative flex min-h-screen flex-col items-center overflow-hidden px-5 pt-28 text-center md:pt-36">
         <div className="relative z-10 max-w-3xl">
@@ -106,18 +104,12 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 6, sharp instincts */}
-      <section className="mx-auto max-w-[1600px] px-5 py-28 md:px-10 md:py-40">
-        <div className="grid gap-16 md:grid-cols-2">
-          <Reveal variant="mask">
-            <h2 className="font-display text-display-md font-bold text-ink">Sharp instincts.</h2>
-          </Reveal>
-          <CheckList items={STRENGTHS} />
-        </div>
-      </section>
+      {/* 6, perspective + sharp instincts — pinned, points fly in from both sides */}
+      <WhyMe />
 
       {/* 7, CTA panel with hover-to-reveal email */}
       <CtaPanel />
+      </div>
     </>
   )
 }

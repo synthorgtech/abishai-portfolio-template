@@ -73,8 +73,13 @@ public/assets/           # img / video / lottie / fonts (placeholders + real)
 - **Portfolio folder** (`FolderIcons.jsx`) — opens to reveal an "Awards & Certifications"
   file that links to the About awards section.
 - **CTA reveal** (`CtaPanel.jsx`) — hovering "Let's talk" slides up the email + "Copy my Email".
+- **Hero expose** (`Home.jsx`) — the hero is pinned (`sticky`) behind the content sheet, which
+  lifts over it on scroll (the same "expose" move as the footer, mirrored at the top).
+- **Perspective section** (`WhyMe.jsx`) — one full-bleed photo of AG; the kicker + headline
+  reveal word by word, the divider line draws across, the photo drifts with the cursor, and the
+  pinned column lifts on scroll so the fourth point + button appear. Single screen on mobile.
 - **Reveal footer** (`App.jsx` + `Footer.jsx`) — the page lifts as a rounded sheet to expose
-  the full-screen footer scene beneath.
+  the full-screen footer scene beneath, with the contact list on the left edge.
 - **Hobbies scrapbook** (`Hobbies.jsx`), **section reveals** (`Reveal.jsx`), magnetic buttons,
   wave-on-hover links.
 
