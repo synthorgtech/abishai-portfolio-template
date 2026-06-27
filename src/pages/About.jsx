@@ -1,27 +1,29 @@
-// ABOUT, replicates the reference flow:
-//   1. centered landing headline (logo mark + dot + big grey type)
-//   2. full-bleed gradient rings expand on scroll
-//   3. full-bleed image is revealed
-//   4. two-column sections (peach heading left / grey body right): Who I Am,
-//      Approach, Philosophy, Community & Giving, Awards & Recognition, Writing
-//   5. dark News & Updates feature card
-//   6. Education footnote
+// ABOUT — built to feel continuous, like the home page:
+//   1. a pinned peach hero (AboutHero) that the content sheet lifts up to uncover
+//   2. an intro statement with drifting blobs, then a rounded image card
+//   3. a stat strip + two-column sections (peach heading + grey body), no hard
+//      dividers — just generous space so it reads as one flowing page
+//   4. Off the clock (hobbies) + a dark News & Updates closing card
 import { useEffect } from 'react'
 import { AboutHero } from '../components/AboutHero'
-import { RingScene } from '../components/RingScene'
 import { ParallaxImage } from '../components/ParallaxImage'
 import { NewsFeature } from '../components/NewsFeature'
 import { Hobbies } from '../components/Hobbies'
 import { StatStrip } from '../components/StatStrip'
+import { Reveal } from '../components/Reveal'
+import { FloatingBlobs } from '../components/FloatingBlobs'
 import { awards, writing } from '../data/awards'
 
 // Two-column section: large peach heading (right-aligned in left col) + grey body.
+// No hard divider — sections flow continuously, separated only by generous space.
 function Section({ title, children, className = '', id }) {
   return (
-    <section id={id} className={`scroll-mt-28 border-t border-ink/10 ${className}`}>
-      <div className="mx-auto grid max-w-[1600px] gap-8 px-5 py-20 md:grid-cols-2 md:gap-16 md:px-10 md:py-28">
+    <section id={id} className={`scroll-mt-28 ${className}`}>
+      <div className="mx-auto grid max-w-[1600px] gap-8 px-5 py-14 md:grid-cols-2 md:gap-16 md:px-10 md:py-20">
         <div className="md:pr-10 md:text-right">
-          <h2 className="font-display text-display-md font-bold text-peach">{title}</h2>
+          <Reveal variant="mask">
+            <h2 className="font-display text-display-md font-bold text-peach">{title}</h2>
+          </Reveal>
         </div>
         <div className="max-w-xl space-y-5 font-body text-lg leading-relaxed text-ink/70">
           {children}
@@ -46,23 +48,43 @@ export default function About() {
 
   return (
     <>
-      {/* 1, landing hero */}
-      <AboutHero />
+      {/* 1, hero — pinned BEHIND; the content sheet below lifts up and uncovers it
+          (same expose move as the home hero / reveal footer). */}
+      <div className="sticky top-0 z-0 h-screen overflow-hidden">
+        <AboutHero />
+      </div>
 
-      {/* 2, gradient rings expand on scroll */}
-      <RingScene />
+      {/* everything else is one continuous sheet that rises over the pinned hero */}
+      <div className="relative z-10 rounded-t-[2.5rem] bg-cream shadow-[0_-16px_50px_-34px_rgba(51,51,51,0.25)]">
+        {/* 2, intro statement with drifting blobs */}
+        <section className="relative flex min-h-[88vh] flex-col items-center overflow-hidden px-5 pt-28 text-center md:pt-36">
+          <div className="relative z-10 max-w-3xl">
+            <Reveal variant="mask">
+              <h2 className="font-display text-[clamp(2rem,5vw,4rem)] font-bold leading-[1.05] text-gray-warm">
+                Founder, engineer, and computer-science student, building products that feel{' '}
+                <span className="text-peach">useful, human, and built to last</span>.
+              </h2>
+            </Reveal>
+            <Reveal variant="up">
+              <p className="mx-auto mt-7 max-w-md font-body text-lg text-ink/60">
+                The short version. Keep scrolling for the longer one.
+              </p>
+            </Reveal>
+          </div>
+          <FloatingBlobs className="absolute inset-x-0 bottom-0 top-[44%] z-0" />
+        </section>
 
-      {/* 3, full-bleed image revealed */}
-      <section className="px-3 md:px-5">
-        {/* TODO: drop /assets/img/desk-photo.jpg to replace this designed scene */}
-        <ParallaxImage
-          src="/assets/img/desk-photo.jpg"
-          alt="Abishai at his desk"
-          label="DESK PHOTO · drop desk-photo.jpg"
-          tone="warm"
-          className="h-[88vh] min-h-[520px]"
-        />
-      </section>
+        {/* 3, image — a rounded, spaced card (no hard full-bleed edge) */}
+        <section className="mx-auto max-w-[1600px] px-5 pb-8 md:px-10">
+          {/* TODO: drop /assets/img/desk-photo.jpg to replace this designed scene */}
+          <ParallaxImage
+            src="/assets/img/desk-photo.jpg"
+            alt="Abishai at his desk"
+            label="DESK PHOTO · drop desk-photo.jpg"
+            tone="warm"
+            className="h-[68vh] min-h-[440px]"
+          />
+        </section>
 
       {/* stat strip */}
       <section className="mx-auto max-w-[1600px] px-5 py-16 md:px-10">
@@ -206,6 +228,7 @@ export default function About() {
 
       {/* dark feature card — closing flourish */}
       <NewsFeature />
+      </div>
     </>
   )
 }
